@@ -1,5 +1,5 @@
 ---
-status: partial
+status: complete
 phase: 01-foundation-content
 source: ROADMAP.md success criteria, 01-PLAN.md, 02-PLAN.md, 03-PLAN.md
 started: 2026-03-30T20:40:00Z
@@ -102,7 +102,7 @@ skipped: 0
 ## Gaps
 
 - truth: "6 agent loop nodes display on a single horizontal line on full screen"
-  status: failed
+  status: fixed
   reason: "User reported: 6th node wraps to a new line even on full screen"
   severity: minor
   test: 4
