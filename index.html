@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master OpenCode - Interactive Learning Guide</title>
+<meta name="description" content="The interactive, hands-on guide to mastering OpenCode — the open-source AI coding agent with 133K+ GitHub stars.">
+<meta property="og:title" content="Master OpenCode - Interactive Learning Guide">
+<meta property="og:description" content="Learn OpenCode from zero to hero with interactive lessons, challenges, and quizzes.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://opencode.ai/docs/_astro/screenshot.CQjBbRyJ_1dLadc.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect x='10' y='10' width='35' height='35' rx='5' fill='%238b5cf6'/><rect x='55' y='10' width='35' height='35' rx='5' fill='%238b5cf6' opacity='.6'/><rect x='10' y='55' width='35' height='35' rx='5' fill='%238b5cf6' opacity='.6'/><rect x='55' y='55' width='35' height='35' rx='5' fill='%238b5cf6' opacity='.3'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#0a0a0b;--bg-2:#111113;--bg-3:#18181b;--bg-4:#1f1f23;
+--border:#27272a;--border-2:#3f3f46;
+--text:#fafafa;--text-2:#a1a1aa;--text-3:#71717a;
+--accent:#8b5cf6;--accent-2:#a78bfa;--accent-3:#c4b5fd;
+--green:#22c55e;--green-2:#4ade80;--green-bg:rgba(34,197,94,.1);
+--blue:#3b82f6;--blue-2:#60a5fa;--blue-bg:rgba(59,130,246,.1);
+--orange:#f97316;--orange-bg:rgba(249,115,22,.1);
+--red:#ef4444;--red-bg:rgba(239,68,68,.1);
+--pink:#ec4899;
+--radius:12px;--radius-sm:8px;--radius-lg:16px;
+--shadow:0 0 0 1px var(--border),0 4px 24px rgba(0,0,0,.4);
+--transition:all .2s cubic-bezier(.4,0,.2,1);
+--page-enter:pageIn .35s ease both;
+--page-exit:pageOut .2s ease both;
+}
+[data-theme="light"]{
+--bg:#fafafa;--bg-2:#ffffff;--bg-3:#f4f4f5;--bg-4:#e4e4e7;
+--border:#e4e4e7;--border-2:#d4d4d8;
+--text:#18181b;--text-2:#52525b;--text-3:#a1a1aa;
+--accent:#7c3aed;--accent-2:#6d28d9;--accent-3:#8b5cf6;
+--green-bg:rgba(34,197,94,.08);--blue-bg:rgba(59,130,246,.08);
+--orange-bg:rgba(249,115,22,.08);--red-bg:rgba(239,68,68,.08);
+--shadow:0 0 0 1px var(--border),0 4px 24px rgba(0,0,0,.08);
+}
+@keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pageOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-8px)}}
+html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden;transition:background .3s,color .3s}
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,11,.85);border-bottom:1px solid var(--border);transition:var(--transition)}
+[data-theme="light"] nav{background:rgba(250,250,250,.85)}
+nav .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
+nav .logo{font-weight:800;font-size:1.1rem;display:flex;align-items:center;gap:10px;color:var(--text);text-decoration:none}
+nav .logo span{background:linear-gradient(135deg,var(--accent),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-right{display:flex;align-items:center;gap:6px}
+.nav-right a{color:var(--text-2);text-decoration:none;font-size:.85rem;font-weight:500;padding:6px 14px;border-radius:var(--radius-sm);transition:var(--transition)}
+.nav-right a:hover{color:var(--text);background:var(--bg-3)}
+.search-btn{display:flex;align-items:center;gap:8px;padding:6px 14px;border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-3);font-size:.8rem;cursor:pointer;background:none;font-family:inherit;transition:var(--transition)}
+.search-btn:hover{border-color:var(--border-2);color:var(--text-2)}
+.search-btn kbd{background:var(--bg-3);padding:2px 6px;border-radius:4px;font-size:.7rem;border:1px solid var(--border);font-family:'Inter',sans-serif}
+.theme-toggle{width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm);border:1px solid var(--border);background:none;color:var(--text-2);cursor:pointer;font-size:1rem;transition:var(--transition)}
+.theme-toggle:hover{background:var(--bg-3);color:var(--text)}
+.progress-bar{position:fixed;top:64px;left:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--pink),var(--orange));z-index:99;transition:width .3s ease}
+
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(ellipse at 50% 50%,rgba(139,92,246,.08) 0%,transparent 50%);animation:pulse-bg 8s ease-in-out infinite}
+@keyframes pulse-bg{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.05)}}
+.hero-content{position:relative;z-index:1;max-width:800px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;background:var(--bg-3);border:1px solid var(--border);border-radius:100px;font-size:.8rem;color:var(--text-2);margin-bottom:32px;font-weight:500}
+.hero-badge .dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;line-height:1.1;letter-spacing:-.03em;margin-bottom:24px}
+.hero h1 .gradient{background:linear-gradient(135deg,var(--accent-2),var(--pink),var(--orange));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:var(--text-2);max-width:560px;margin:0 auto 40px;line-height:1.8}
+.hero-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:var(--radius-sm);font-size:.9rem;font-weight:600;cursor:pointer;transition:var(--transition);border:none;text-decoration:none;font-family:inherit}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-2);transform:translateY(-1px);box-shadow:0 4px 20px rgba(139,92,246,.3)}
+.btn-secondary{background:var(--bg-3);color:var(--text);border:1px solid var(--border)}
+.btn-secondary:hover{background:var(--bg-4);border-color:var(--border-2)}
+.btn-sm{padding:8px 18px;font-size:.82rem}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:600px;margin:48px auto 0}
+.stat{text-align:center}
+.stat .number{font-size:1.8rem;font-weight:800;background:linear-gradient(135deg,var(--accent-2),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat .label{font-size:.78rem;color:var(--text-3);font-weight:500;margin-top:2px}
+
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+section{padding:80px 0}
+
+.section-header{text-align:center;margin-bottom:64px}
+.section-header .label{font-size:.75rem;text-transform:uppercase;letter-spacing:.15em;color:var(--accent-2);font-weight:700;margin-bottom:12px}
+.section-header h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.02em;margin-bottom:16px}
+.section-header p{color:var(--text-2);max-width:560px;margin:0 auto;font-size:1rem}
+
+.chapter-grid{display:grid;gap:16px;max-width:900px;margin:0 auto}
+.chapter-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;cursor:pointer;transition:var(--transition);position:relative;overflow:hidden}
+.chapter-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 32px rgba(139,92,246,.1)}
+.chapter-card .chapter-num{font-size:.7rem;font-weight:700;color:var(--accent-2);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
+.chapter-card h3{font-size:1.15rem;font-weight:700;margin-bottom:6px}
+.chapter-card p{font-size:.88rem;color:var(--text-2);line-height:1.6}
+.chapter-card .arrow{position:absolute;right:28px;top:50%;transform:translateY(-50%);color:var(--text-3);transition:var(--transition)}
+.chapter-card:hover .arrow{color:var(--accent);transform:translateY(-50%) translateX(4px)}
+.chapter-card .tag{display:inline-block;padding:3px 10px;border-radius:100px;font-size:.7rem;font-weight:600;margin-top:12px}
+.chapter-card .check{position:absolute;top:20px;right:56px;width:24px;height:24px;border-radius:50%;background:var(--green-bg);display:none;align-items:center;justify-content:center;color:var(--green);font-size:.7rem;font-weight:800}
+.chapter-card .check.done{display:flex}
+.tag-beginner{background:var(--green-bg);color:var(--green)}
+.tag-intermediate{background:var(--blue-bg);color:var(--blue)}
+.tag-advanced{background:var(--orange-bg);color:var(--orange)}
+
+.lesson-view{display:none;max-width:900px;margin:0 auto}
+.lesson-view.active{display:block;animation:var(--page-enter)}
+.lesson-back{display:inline-flex;align-items:center;gap:6px;color:var(--text-2);font-size:.85rem;font-weight:500;cursor:pointer;margin-bottom:32px;transition:var(--transition);background:none;border:none;font-family:inherit}
+.lesson-back:hover{color:var(--accent)}
+.lesson-header{margin-bottom:40px}
+.lesson-header .label{font-size:.7rem;font-weight:700;color:var(--accent-2);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
+.lesson-header h2{font-size:2rem;font-weight:800;letter-spacing:-.02em}
+.lesson-header p{color:var(--text-2);margin-top:12px;font-size:.95rem;line-height:1.8}
+
+.lesson-content h3{font-size:1.2rem;font-weight:700;margin:32px 0 16px;padding-top:16px;border-top:1px solid var(--border)}
+.lesson-content p{color:var(--text-2);margin-bottom:16px;line-height:1.8;font-size:.92rem}
+.lesson-content ul{color:var(--text-2);margin-bottom:16px;padding-left:20px}
+.lesson-content li{margin-bottom:8px;font-size:.92rem}
+.lesson-content strong{color:var(--text);font-weight:600}
+
+.code-block{position:relative;margin:20px 0;border-radius:var(--radius);overflow:hidden;border:1px solid var(--border)}
+.code-header{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--bg-3);border-bottom:1px solid var(--border)}
+.code-header .lang{font-size:.72rem;font-weight:600;color:var(--text-3);text-transform:uppercase;letter-spacing:.08em}
+.code-header .copy-btn{font-size:.72rem;color:var(--text-3);background:none;border:1px solid var(--border);padding:3px 10px;border-radius:4px;cursor:pointer;font-family:inherit;transition:var(--transition)}
+.code-header .copy-btn:hover{color:var(--text);border-color:var(--border-2)}
+.code-block pre{padding:20px;overflow-x:auto;background:var(--bg-2)}
+.code-block code{font-family:'JetBrains Mono',monospace;font-size:.82rem;line-height:1.8;color:var(--text-2)}
+.code-block .prompt{color:var(--green)}
+.code-block .cmd{color:var(--accent-2)}
+.code-block .flag{color:var(--orange)}
+.code-block .str{color:var(--green-2)}
+.code-block .comment{color:var(--text-3)}
+.code-block .key{color:var(--blue-2)}
+
+.info-box{padding:20px 24px;border-radius:var(--radius);margin:20px 0;font-size:.88rem;line-height:1.7}
+.info-box.tip{background:var(--blue-bg);border:1px solid rgba(59,130,246,.2);color:var(--blue-2)}
+.info-box.warning{background:var(--orange-bg);border:1px solid rgba(249,115,22,.2);color:var(--orange)}
+.info-box.success{background:var(--green-bg);border:1px solid rgba(34,197,94,.2);color:var(--green-2)}
+.info-box .info-label{font-weight:700;font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px}
+
+.step-list{counter-reset:step;list-style:none;margin:20px 0}
+.step-list li{counter-increment:step;position:relative;padding:16px 20px 16px 56px;margin-bottom:8px;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-2);font-size:.88rem;line-height:1.6}
+.step-list li::before{content:counter(step);position:absolute;left:16px;top:14px;width:28px;height:28px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700}
+
+.table-wrap{overflow-x:auto;margin:20px 0;border:1px solid var(--border);border-radius:var(--radius)}
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th{text-align:left;padding:12px 16px;background:var(--bg-3);color:var(--text);font-weight:600;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:12px 16px;border-bottom:1px solid var(--border);color:var(--text-2)}
+tr:last-child td{border-bottom:none}
+code.inline{font-family:'JetBrains Mono',monospace;font-size:.8rem;background:var(--bg-3);padding:2px 8px;border-radius:4px;border:1px solid var(--border);color:var(--accent-2)}
+
+.lesson-nav{display:flex;justify-content:space-between;margin-top:48px;padding-top:24px;border-top:1px solid var(--border)}
+
+.terminal-sim{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin:24px 0;box-shadow:var(--shadow)}
+.terminal-header{display:flex;align-items:center;gap:8px;padding:12px 16px;background:var(--bg-3);border-bottom:1px solid var(--border)}
+.terminal-dot{width:12px;height:12px;border-radius:50%}
+.terminal-dot.r{background:#ef4444}.terminal-dot.y{background:#eab308}.terminal-dot.g{background:#22c55e}
+.terminal-title{font-size:.75rem;color:var(--text-3);margin-left:8px;font-weight:500}
+.terminal-body{padding:20px;min-height:200px;max-height:400px;overflow-y:auto;font-family:'JetBrains Mono',monospace;font-size:.8rem;line-height:1.9}
+.terminal-body .line{display:flex;gap:8px}
+.terminal-body .line .ps1{color:var(--green);white-space:nowrap}
+.terminal-body .line .input{color:var(--text)}
+.terminal-body .line.output{color:var(--text-2);padding-left:0;white-space:pre-wrap}
+.terminal-body .line.output .ps1{display:none}
+.terminal-input-line{display:flex;align-items:center;gap:8px;padding:12px 20px;border-top:1px solid var(--border);background:var(--bg-3)}
+.terminal-input-line .ps1{color:var(--green);font-family:'JetBrains Mono',monospace;font-size:.8rem;white-space:nowrap}
+.terminal-input-line input{flex:1;background:none;border:none;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:.8rem;outline:none}
+.terminal-input-line .hint{color:var(--text-3);font-size:.7rem}
+
+.quiz-section{max-width:700px;margin:0 auto}
+.quiz-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:32px;margin-bottom:16px}
+.quiz-card .q-num{font-size:.7rem;font-weight:700;color:var(--accent-2);text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px}
+.quiz-card h4{font-size:1.05rem;font-weight:700;margin-bottom:20px;line-height:1.5}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-opt{padding:14px 18px;border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-size:.88rem;color:var(--text-2);transition:var(--transition);background:none;text-align:left;font-family:inherit;width:100%}
+.quiz-opt:hover{border-color:var(--accent);color:var(--text)}
+.quiz-opt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green-2)}
+.quiz-opt.wrong{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.quiz-opt.disabled{pointer-events:none;opacity:.6}
+.quiz-result{margin-top:16px;padding:12px 16px;border-radius:var(--radius-sm);font-size:.85rem;display:none}
+.quiz-result.show{display:block}
+.quiz-result.pass{background:var(--green-bg);color:var(--green-2);border:1px solid rgba(34,197,94,.2)}
+.quiz-result.fail{background:var(--red-bg);color:var(--red);border:1px solid rgba(239,68,68,.2)}
+
+.cheat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.cheat-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.cheat-card h4{font-size:.9rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.cheat-card h4 .icon{width:20px;height:20px;border-radius:4px;display:inline-flex;align-items:center;justify-content:center;font-size:.7rem}
+.cheat-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border);font-size:.82rem}
+.cheat-row:last-child{border-bottom:none}
+.cheat-row .key{font-family:'JetBrains Mono',monospace;color:var(--accent-2);font-size:.78rem;background:var(--bg-3);padding:2px 8px;border-radius:4px}
+.cheat-row .desc{color:var(--text-2)}
+
+footer{text-align:center;padding:48px 24px;border-top:1px solid var(--border);color:var(--text-3);font-size:.82rem}
+footer a{color:var(--accent-2);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+.sidebar-nav{position:fixed;left:0;top:64px;bottom:0;width:260px;background:var(--bg-2);border-right:1px solid var(--border);padding:24px 0;overflow-y:auto;z-index:50;transform:translateX(-100%);transition:var(--transition)}
+.sidebar-nav.open{transform:translateX(0)}
+.sidebar-nav a{display:block;padding:10px 24px;color:var(--text-2);text-decoration:none;font-size:.82rem;font-weight:500;transition:var(--transition);border-left:2px solid transparent}
+.sidebar-nav a:hover,.sidebar-nav a.active{color:var(--accent-2);background:rgba(139,92,246,.05);border-left-color:var(--accent)}
+.sidebar-toggle{display:none;background:none;border:none;color:var(--text-2);cursor:pointer;font-size:1.2rem;padding:4px}
+
+.tab-bar{display:flex;gap:4px;padding:4px;background:var(--bg-3);border-radius:var(--radius-sm);margin:20px 0;border:1px solid var(--border)}
+.tab-btn{flex:1;padding:10px;text-align:center;font-size:.82rem;font-weight:600;color:var(--text-3);background:none;border:none;cursor:pointer;border-radius:6px;transition:var(--transition);font-family:inherit}
+.tab-btn.active{background:var(--accent);color:#fff}
+.tab-btn:hover:not(.active){color:var(--text)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+.search-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);display:none;align-items:flex-start;justify-content:center;padding-top:20vh}
+.search-overlay.open{display:flex}
+.search-modal{width:90%;max-width:560px;background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:0 24px 64px rgba(0,0,0,.5);overflow:hidden;animation:var(--page-enter)}
+.search-input-wrap{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--border)}
+.search-input-wrap svg{color:var(--text-3);flex-shrink:0}
+.search-input-wrap input{flex:1;background:none;border:none;color:var(--text);font-size:1rem;font-family:inherit;outline:none}
+.search-input-wrap input::placeholder{color:var(--text-3)}
+.search-results{max-height:360px;overflow-y:auto;padding:8px}
+.search-result{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:var(--radius-sm);cursor:pointer;transition:var(--transition)}
+.search-result:hover,.search-result.focused{background:var(--bg-3)}
+.search-result .sr-num{font-size:.65rem;font-weight:700;color:var(--accent-2);background:var(--bg-3);padding:3px 8px;border-radius:4px;flex-shrink:0;min-width:32px;text-align:center}
+.search-result .sr-text{font-size:.85rem;color:var(--text-2)}
+.search-result .sr-text em{color:var(--accent-2);font-style:normal;font-weight:600}
+.search-empty{padding:24px;text-align:center;color:var(--text-3);font-size:.85rem}
+
+.agent-loop{display:flex;align-items:center;justify-content:center;gap:0;margin:40px auto;max-width:700px;flex-wrap:wrap}
+.loop-node{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);padding:20px 24px;text-align:center;min-width:120px;position:relative;transition:var(--transition)}
+.loop-node:hover{border-color:var(--accent);transform:translateY(-2px)}
+.loop-node .node-icon{font-size:1.5rem;margin-bottom:6px}
+.loop-node .node-label{font-size:.75rem;font-weight:700;color:var(--text-2);text-transform:uppercase;letter-spacing:.08em}
+.loop-node.active-node{border-color:var(--accent);box-shadow:0 0 20px rgba(139,92,246,.2)}
+.loop-node.active-node .node-label{color:var(--accent-2)}
+.loop-arrow{color:var(--text-3);font-size:1.2rem;padding:0 8px;flex-shrink:0}
+.loop-arrow.animate{animation:arrowPulse 1.5s infinite;color:var(--accent-2)}
+@keyframes arrowPulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+.challenge-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);padding:28px 32px;margin-bottom:16px}
+.challenge-card h4{font-size:1rem;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.challenge-card .scenario{color:var(--text-2);font-size:.88rem;line-height:1.7;margin-bottom:16px}
+.challenge-opts{display:flex;flex-direction:column;gap:6px}
+.challenge-opt{padding:12px 16px;border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;font-size:.84rem;color:var(--text-2);transition:var(--transition);background:none;text-align:left;font-family:inherit;width:100%;font-family:'JetBrains Mono',monospace}
+.challenge-opt:hover{border-color:var(--accent);color:var(--text)}
+.challenge-opt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green-2)}
+.challenge-opt.wrong{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.challenge-opt.disabled{pointer-events:none;opacity:.5}
+.challenge-feedback{margin-top:12px;font-size:.84rem;padding:10px 14px;border-radius:var(--radius-sm);display:none}
+.challenge-feedback.show{display:block}
+.challenge-feedback.pass{background:var(--green-bg);color:var(--green-2)}
+.challenge-feedback.fail{background:var(--red-bg);color:var(--red)}
+
+.workflow-card{background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px}
+.workflow-header{padding:20px 24px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:var(--transition)}
+.workflow-header:hover{background:var(--bg-3)}
+.workflow-header h4{font-size:.95rem;font-weight:700}
+.workflow-steps{display:none;padding:0 24px 24px}
+.workflow-steps.open{display:block}
+.wf-step{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.wf-step:last-child{border-bottom:none}
+.wf-step .wf-num{width:28px;height:28px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;margin-top:2px}
+.wf-step .wf-content{flex:1}
+.wf-step .wf-content strong{font-size:.85rem;color:var(--text)}
+.wf-step .wf-content p{font-size:.82rem;color:var(--text-2);margin-top:4px;line-height:1.6}
+
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  .hero h1{font-size:2.2rem}
+  .stats{grid-template-columns:repeat(3,1fr);gap:12px}
+  .stat .number{font-size:1.3rem}
+  .nav-right a{display:none}
+  .search-btn kbd{display:none}
+  .sidebar-toggle{display:block}
+  .sidebar-nav{width:240px}
+  section{padding:48px 0}
+  .lesson-nav{flex-direction:column;gap:8px}
+  .cheat-grid{grid-template-columns:1fr}
+  .agent-loop{flex-direction:column}
+  .loop-arrow{transform:rotate(90deg)}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo" onclick="showHome()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1" fill="#8b5cf6"/><rect x="13" y="3" width="8" height="8" rx="1" fill="#8b5cf6" opacity=".6"/><rect x="3" y="13" width="8" height="8" rx="1" fill="#8b5cf6" opacity=".6"/><rect x="13" y="13" width="8" height="8" rx="1" fill="#8b5cf6" opacity=".3"/></svg>
+      <span>Master OpenCode</span>
+    </a>
+    <div class="nav-right">
+      <button class="search-btn" onclick="openSearch()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg> Search <kbd>Ctrl K</kbd></button>
+      <a href="#" onclick="showHome()">Lessons</a>
+      <a href="#" onclick="showPage('playground')">Playground</a>
+      <a href="#" onclick="showPage('challenges')">Challenges</a>
+      <a href="#" onclick="showPage('cheatsheet')">Cheat Sheet</a>
+      <a href="#" onclick="showPage('quiz')">Quiz</a>
+      <button class="theme-toggle" onclick="cycleTheme()" id="themeBtn" title="Toggle theme">&#9790;</button>
+      <button class="sidebar-toggle" onclick="toggleSidebar()">&#9776;</button>
+    </div>
+  </div>
+</nav>
+<div class="progress-bar" id="progressBar" style="width:0%"></div>
+
+<div class="search-overlay" id="searchOverlay" onclick="if(event.target===this)closeSearch()">
+  <div class="search-modal">
+    <div class="search-input-wrap">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="Search lessons, commands, concepts..." autocomplete="off" spellcheck="false">
+    </div>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<div class="sidebar-nav" id="sidebar">
+  <a href="#" onclick="showHome();closeSidebar()" class="active">Home</a>
+  <a href="#" onclick="showLesson(0);closeSidebar()">1. What is OpenCode?</a>
+  <a href="#" onclick="showLesson(1);closeSidebar()">2. Installation</a>
+  <a href="#" onclick="showLesson(2);closeSidebar()">3. Configuration</a>
+  <a href="#" onclick="showLesson(3);closeSidebar()">4. Core Concepts</a>
+  <a href="#" onclick="showLesson(4);closeSidebar()">5. Working with Agents</a>
+  <a href="#" onclick="showLesson(5);closeSidebar()">6. Tools Deep Dive</a>
+  <a href="#" onclick="showLesson(6);closeSidebar()">7. Commands &amp; Automation</a>
+  <a href="#" onclick="showLesson(7);closeSidebar()">8. Advanced Setup</a>
+  <a href="#" onclick="showPage('playground');closeSidebar()">Playground</a>
+  <a href="#" onclick="showPage('challenges');closeSidebar()">Challenges</a>
+  <a href="#" onclick="showPage('cheatsheet');closeSidebar()">Cheat Sheet</a>
+  <a href="#" onclick="showPage('quiz');closeSidebar()">Quiz</a>
+</div>
+
+<div id="homeView">
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span> Free &amp; Open Source &mdash; 133K+ Stars</div>
+      <h1>Master <span class="gradient">OpenCode</span><br>From Zero to Hero</h1>
+      <p>An interactive, hands-on guide to the most powerful open-source AI coding agent. Learn by doing, one concept at a time.</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="showLesson(0)">Start Learning &rarr;</button>
+        <a href="https://opencode.ai" target="_blank" class="btn btn-secondary">Official Docs</a>
+      </div>
+      <div class="stats">
+        <div class="stat"><div class="number">8</div><div class="label">Lessons</div></div>
+        <div class="stat"><div class="number">40+</div><div class="label">Examples</div></div>
+        <div class="stat"><div class="number">16</div><div class="label">Quizzes</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="chapters">
+    <div class="container">
+      <div class="section-header">
+        <div class="label">Learning Path</div>
+        <h2>Your Journey Starts Here</h2>
+        <p>Follow the lessons in order, or jump to any topic. Each builds on the last.</p>
+      </div>
+      <div class="chapter-grid" id="chapterGrid">
+        <div class="chapter-card" onclick="showLesson(0)"><span class="check" id="chk0">&#10003;</span><div class="chapter-num">Chapter 01</div><h3>What is OpenCode?</h3><p>Understand what OpenCode is, why it matters, and how it fits into your workflow.</p><span class="tag tag-beginner">Beginner</span><span class="arrow">&rarr;</span></div>
+        <div class="chapter-card" onclick="showLesson(1)"><span class="check" id="chk1">&#10003;</span><div class="chapter-num">Chapter 02</div><h3>Installation</h3><p>Install OpenCode on macOS, Linux, or Windows using your preferred package manager.</p><span class="tag tag-beginner">Beginner</span><span class="arrow">&rarr;</span></div>
+        <div class="chapter-card" onclick="showLesson(2)"><span class="check" id="chk2">&#10003;</span><div class="chapter-num">Chapter 03</div><h3>Configuration</h3><p>Set up providers, API keys, and customize OpenCode to work with your favorite models.</p><span class="tag tag-beginner">Beginner</span><span class="arrow">&rarr;</span></div>
+        <div class="chapter-card" onclick="showLesson(3)"><span class="check" id="chk3">&#10003;</span><div class="chapter-num">Chapter 04</div><h3>Core Concepts</h3><p>Learn the fundamentals: sessions, messages, agents, and the agent loop.</p><span class="tag tag-beginner">Beginner</span><span class="arrow">&rarr;</span></div>
+        <div class="chapter-card" onclick="showLesson(4)"><span class="check" id="chk4">&#10003;</span><div class="chapter-num">Chapter 05</div><h3>Working with Agents</h3><p>Master Build and Plan agents, create custom agents, and leverage subagents.</p><span class="tag tag-intermediate">Intermediate</span><span class="arrow">&rarr;</span></div>
+        <div class="chapter-card" onclick="showLesson(5)"><span class="check" id="chk5">&#10003;</span><div class="chapter-num">Chapter 06</div><h3>Tools Deep Dive</h3><p>Explore all built-in tools: bash, edit, read, grep, glob, webfetch, and more.</p><span class="tag tag-intermediate">Intermediate</span><span class="arrow">&rarr;</span></div>
+        <div class="chapter-card" onclick="showLesson(6)"><span class="check" id="chk6">&#10003;</span><div class="chapter-num">Chapter 07</div><h3>Commands &amp; Automation</h3><p>Create custom commands for repetitive tasks and streamline your workflow.</p><span class="tag tag-intermediate">Intermediate</span><span class="arrow">&rarr;</span></div>
+        <div class="chapter-card" onclick="showLesson(7)"><span class="check" id="chk7">&#10003;</span><div class="chapter-num">Chapter 08</div><h3>Advanced Setup</h3><p>MCP servers, plugins, LSP integration, permissions, and enterprise features.</p><span class="tag tag-advanced">Advanced</span><span class="arrow">&rarr;</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="agentLoopSection">
+    <div class="container">
+      <div class="section-header">
+        <div class="label">How It Works</div>
+        <h2>The Agent Loop</h2>
+        <p>OpenCode follows an agentic loop &mdash; autonomously executing multi-step plans using tools.</p>
+      </div>
+      <div class="agent-loop" id="agentLoop">
+        <div class="loop-node active-node"><div class="node-icon">&#128100;</div><div class="node-label">You</div></div>
+        <div class="loop-arrow animate">&rarr;</div>
+        <div class="loop-node"><div class="node-icon">&#129302;</div><div class="node-label">LLM</div></div>
+        <div class="loop-arrow animate">&rarr;</div>
+        <div class="loop-node"><div class="node-icon">&#128295;</div><div class="node-label">Tools</div></div>
+        <div class="loop-arrow animate">&rarr;</div>
+        <div class="loop-node"><div class="node-icon">&#128196;</div><div class="node-label">Codebase</div></div>
+        <div class="loop-arrow animate">&rarr;</div>
+        <div class="loop-node"><div class="node-icon">&#128260;</div><div class="node-label">Result</div></div>
+        <div class="loop-arrow animate">&rarr;</div>
+        <div class="loop-node"><div class="node-icon">&#129302;</div><div class="node-label">LLM</div></div>
+      </div>
+      <p style="text-align:center;color:var(--text-3);font-size:.82rem;margin-top:16px">The loop continues until the task is complete or you press Escape to interrupt.</p>
+    </div>
+  </section>
+
+  <section id="workflowsSection">
+    <div class="container">
+      <div class="section-header">
+        <div class="label">Practical Guides</div>
+        <h2>Real-World Workflows</h2>
+        <p>Step-by-step guides for common OpenCode use cases.</p>
+      </div>
+      <div style="max-width:700px;margin:0 auto">
+        <div class="workflow-card">
+          <div class="workflow-header" onclick="toggleWorkflow(this)"><h4>&#128640; Add a New Feature</h4><span style="color:var(--text-3)">&#9662;</span></div>
+          <div class="workflow-steps">
+            <div class="wf-step"><div class="wf-num">1</div><div class="wf-content"><strong>Switch to Plan mode (Tab)</strong><p>Describe what you want: "When a user deletes a note, flag it as deleted. Create a screen showing recently deleted notes."</p></div></div>
+            <div class="wf-step"><div class="wf-num">2</div><div class="wf-content"><strong>Review the plan</strong><p>OpenCode analyzes your codebase and proposes an implementation plan. Iterate until you're satisfied.</p></div></div>
+            <div class="wf-step"><div class="wf-num">3</div><div class="wf-content"><strong>Switch to Build mode (Tab)</strong><p>Say "Sounds good, go ahead!" and OpenCode implements the changes across multiple files.</p></div></div>
+            <div class="wf-step"><div class="wf-num">4</div><div class="wf-content"><strong>Review &amp; test</strong><p>Check the changes. If wrong, run <code class="inline">/undo</code> to revert and try again with a refined prompt.</p></div></div>
+          </div>
+        </div>
+        <div class="workflow-card">
+          <div class="workflow-header" onclick="toggleWorkflow(this)"><h4>&#128027; Debug a Crash</h4><span style="color:var(--text-3)">&#9662;</span></div>
+          <div class="workflow-steps">
+            <div class="wf-step"><div class="wf-num">1</div><div class="wf-content"><strong>Paste the error</strong><p>"I'm getting TypeError: Cannot read properties of undefined at @src/api/users.ts:42"</p></div></div>
+            <div class="wf-step"><div class="wf-num">2</div><div class="wf-content"><strong>Let OpenCode investigate</strong><p>It reads the file, traces the call stack, checks related types, and identifies the root cause.</p></div></div>
+            <div class="wf-step"><div class="wf-num">3</div><div class="wf-content"><strong>Apply the fix</strong><p>OpenCode suggests a fix and applies it. Run the tests to verify with <code class="inline">bash</code>.</p></div></div>
+          </div>
+        </div>
+        <div class="workflow-card">
+          <div class="workflow-header" onclick="toggleWorkflow(this)"><h4>&#128260; Refactor Legacy Code</h4><span style="color:var(--text-3)">&#9662;</span></div>
+          <div class="workflow-steps">
+            <div class="wf-step"><div class="wf-num">1</div><div class="wf-content"><strong>Start in Plan mode</strong><p>"Refactor @src/utils/helpers.js to TypeScript with proper types. Split into separate modules."</p></div></div>
+            <div class="wf-step"><div class="wf-num">2</div><div class="wf-content"><strong>Review the plan carefully</strong><p>Refactoring is risky. Review every file OpenCode plans to change and give feedback.</p></div></div>
+            <div class="wf-step"><div class="wf-num">3</div><div class="wf-content"><strong>Execute in Build mode</strong><p>"Go ahead. Make sure all existing tests still pass after the refactor."</p></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="lessonView" class="lesson-view">
+  <div class="container" style="padding-top:100px;padding-bottom:80px">
+    <button class="lesson-back" onclick="showHome()">&larr; Back to Lessons</button>
+    <div class="lesson-header"><div class="label" id="lessonLabel"></div><h2 id="lessonTitle"></h2><p id="lessonDesc"></p></div>
+    <div class="lesson-content" id="lessonContent"></div>
+    <div class="lesson-nav">
+      <button class="btn btn-secondary btn-sm" id="prevBtn" onclick="prevLesson()">&larr; Previous</button>
+      <button class="btn btn-primary btn-sm" id="nextBtn" onclick="nextLesson()">Next &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<div id="playgroundView" class="lesson-view">
+  <div class="container" style="padding-top:100px;padding-bottom:80px">
+    <button class="lesson-back" onclick="showHome()">&larr; Back to Lessons</button>
+    <div class="lesson-header"><div class="label">Interactive Playground</div><h2>Try OpenCode Commands</h2><p>Type real OpenCode commands and see what they do. Practice without installing anything.</p></div>
+    <div class="terminal-sim">
+      <div class="terminal-header"><span class="terminal-dot r"></span><span class="terminal-dot y"></span><span class="terminal-dot g"></span><span class="terminal-title">opencode &mdash; interactive simulator</span></div>
+      <div class="terminal-body" id="termBody">
+        <div class="line output">Welcome to the OpenCode simulator! Try these commands:</div>
+        <div class="line output" style="color:var(--accent-2)">opencode, opencode run, /init, /help, /share, /undo, Tab</div>
+        <div class="line output">&nbsp;</div>
+      </div>
+      <div class="terminal-input-line"><span class="ps1">$</span><input type="text" id="termInput" placeholder="Type a command..." autocomplete="off" spellcheck="false"><span class="hint">Enter to run</span></div>
+    </div>
+    <div style="margin-top:24px"><h3 style="font-size:1rem;font-weight:700;margin-bottom:12px">Try these commands:</h3><div style="display:flex;flex-wrap:wrap;gap:8px">
+      <button class="btn btn-secondary btn-sm" onclick="simulate('opencode')">opencode</button>
+      <button class="btn btn-secondary btn-sm" onclick="simulate('opencode run \"Add a login page\"')">opencode run</button>
+      <button class="btn btn-secondary btn-sm" onclick="simulate('/init')">/init</button>
+      <button class="btn btn-secondary btn-sm" onclick="simulate('/help')">/help</button>
+      <button class="btn btn-secondary btn-sm" onclick="simulate('/share')">/share</button>
+      <button class="btn btn-secondary btn-sm" onclick="simulate('/undo')">/undo</button>
+      <button class="btn btn-secondary btn-sm" onclick="simulate('Tab')">Tab</button>
+      <button class="btn btn-secondary btn-sm" onclick="simulate('opencode models')">opencode models</button>
+      <button class="btn btn-secondary btn-sm" onclick="simulate('opencode --version')">opencode --version</button>
+    </div></div>
+  </div>
+</div>
+
+<div id="challengesView" class="lesson-view">
+  <div class="container" style="padding-top:100px;padding-bottom:80px">
+    <button class="lesson-back" onclick="showHome()">&larr; Back to Lessons</button>
+    <div class="lesson-header"><div class="label">Hands-On Practice</div><h2>Interactive Challenges</h2><p>Pick the right OpenCode approach for each real-world scenario. Learn by deciding!</p></div>
+    <div style="max-width:700px;margin:0 auto" id="challengesContainer"></div>
+  </div>
+</div>
+
+<div id="cheatsheetView" class="lesson-view">
+  <div class="container" style="padding-top:100px;padding-bottom:80px">
+    <button class="lesson-back" onclick="showHome()">&larr; Back to Lessons</button>
+    <div class="lesson-header"><div class="label">Quick Reference</div><h2>Cheat Sheet</h2><p>Your go-to reference for everyday OpenCode usage.</p></div>
+    <div class="cheat-grid">
+      <div class="cheat-card"><h4><span class="icon" style="background:var(--green-bg);color:var(--green)">$</span> CLI Commands</h4><div class="cheat-row"><span class="key">opencode</span><span class="desc">Start TUI</span></div><div class="cheat-row"><span class="key">opencode run "msg"</span><span class="desc">One-shot prompt</span></div><div class="cheat-row"><span class="key">opencode models</span><span class="desc">List models</span></div><div class="cheat-row"><span class="key">opencode serve</span><span class="desc">Start server</span></div><div class="cheat-row"><span class="key">opencode agent create</span><span class="desc">Create agent</span></div></div>
+      <div class="cheat-card"><h4><span class="icon" style="background:var(--blue-bg);color:var(--blue)">/</span> Slash Commands</h4><div class="cheat-row"><span class="key">/init</span><span class="desc">Initialize project</span></div><div class="cheat-row"><span class="key">/help</span><span class="desc">Show help</span></div><div class="cheat-row"><span class="key">/undo</span><span class="desc">Undo last change</span></div><div class="cheat-row"><span class="key">/redo</span><span class="desc">Redo change</span></div><div class="cheat-row"><span class="key">/share</span><span class="desc">Share session</span></div><div class="cheat-row"><span class="key">/connect</span><span class="desc">Configure provider</span></div></div>
+      <div class="cheat-card"><h4><span class="icon" style="background:var(--orange-bg);color:var(--orange)">&#8962;</span> Keybinds</h4><div class="cheat-row"><span class="key">Tab</span><span class="desc">Switch agent</span></div><div class="cheat-row"><span class="key">Ctrl+X</span><span class="desc">Leader key</span></div><div class="cheat-row"><span class="key">Ctrl+X &rarr; N</span><span class="desc">New session</span></div><div class="cheat-row"><span class="key">Ctrl+X &rarr; E</span><span class="desc">Open editor</span></div><div class="cheat-row"><span class="key">Ctrl+X &rarr; M</span><span class="desc">Switch model</span></div><div class="cheat-row"><span class="key">Escape</span><span class="desc">Interrupt agent</span></div></div>
+      <div class="cheat-card"><h4><span class="icon" style="background:rgba(139,92,246,.1);color:var(--accent-2)">@</span> Special Syntax</h4><div class="cheat-row"><span class="key">@filename</span><span class="desc">Reference file</span></div><div class="cheat-row"><span class="key">@agent-name</span><span class="desc">Invoke subagent</span></div><div class="cheat-row"><span class="key">$ARGUMENTS</span><span class="desc">Command args</span></div><div class="cheat-row"><span class="key">!\`cmd\`</span><span class="desc">Shell in prompt</span></div><div class="cheat-row"><span class="key">{env:VAR}</span><span class="desc">Env variable</span></div><div class="cheat-row"><span class="key">{file:path}</span><span class="desc">File contents</span></div></div>
+      <div class="cheat-card"><h4><span class="icon" style="background:var(--green-bg);color:var(--green)">&#8595;</span> Install Methods</h4><div class="cheat-row"><span class="key">curl install script</span><span class="desc">Universal</span></div><div class="cheat-row"><span class="key">npm i -g opencode-ai</span><span class="desc">Node.js</span></div><div class="cheat-row"><span class="key">brew install opencode</span><span class="desc">macOS/Linux</span></div><div class="cheat-row"><span class="key">scoop install opencode</span><span class="desc">Windows</span></div><div class="cheat-row"><span class="key">paru -S opencode-bin</span><span class="desc">Arch Linux</span></div></div>
+      <div class="cheat-card"><h4><span class="icon" style="background:var(--red-bg);color:var(--red)">?</span> Config Files</h4><div class="cheat-row"><span class="key">opencode.json</span><span class="desc">Project config</span></div><div class="cheat-row"><span class="key">~/.config/opencode/</span><span class="desc">Global config</span></div><div class="cheat-row"><span class="key">tui.json</span><span class="desc">TUI settings</span></div><div class="cheat-row"><span class="key">AGENTS.md</span><span class="desc">Project context</span></div><div class="cheat-row"><span class="key">.opencode/agents/</span><span class="desc">Custom agents</span></div><div class="cheat-row"><span class="key">.opencode/commands/</span><span class="desc">Custom commands</span></div></div>
+    </div>
+  </div>
+</div>
+
+<div id="quizView" class="lesson-view">
+  <div class="container" style="padding-top:100px;padding-bottom:80px">
+    <button class="lesson-back" onclick="showHome()">&larr; Back to Lessons</button>
+    <div class="lesson-header"><div class="label">Test Your Knowledge</div><h2>Quiz</h2><p>See how well you know OpenCode. Get 7 out of 10 to pass!</p></div>
+    <div class="quiz-section" id="quizContainer"></div>
+    <div style="text-align:center;margin-top:32px"><div id="quizScore" style="display:none;font-size:1.2rem;font-weight:700;margin-bottom:16px"></div><button class="btn btn-primary" onclick="resetQuiz()">Reset Quiz</button></div>
+  </div>
+</div>
+
+<footer>
+  <p>Built for the community &mdash; Not affiliated with <a href="https://anoma.ly" target="_blank">Anomaly</a> / <a href="https://opencode.ai" target="_blank">OpenCode</a></p>
+  <p style="margin-top:8px"><a href="https://github.com/anomalyco/opencode" target="_blank">GitHub</a> &middot; <a href="https://opencode.ai/docs" target="_blank">Docs</a> &middot; <a href="https://discord.gg/opencode" target="_blank">Discord</a></p>
+</footer>
+
+<script>
+const lessons = [
+  {label:"Chapter 01 &middot; Beginner",title:"What is OpenCode?",desc:"OpenCode is the open-source AI coding agent built for the terminal, desktop, and IDE. It helps you write, refactor, debug, and understand code using any LLM provider.",content:`
+<h3>The Big Picture</h3>
+<p>OpenCode is an <strong>AI coding agent</strong> &mdash; not just a chatbot. It can read your codebase, edit files, run terminal commands, and execute multi-step plans autonomously. Think of it as a senior developer pair-programming with you 24/7.</p>
+<p>With over <strong>133,000 GitHub stars</strong>, <strong>800+ contributors</strong>, and <strong>5 million monthly users</strong>, it's the most popular open-source coding agent in the world.</p>
+<h3>What Makes OpenCode Different?</h3>
+<ul><li><strong>100% Open Source</strong> &mdash; Full transparency, community-driven</li><li><strong>Provider-Agnostic</strong> &mdash; Use Claude, GPT, Gemini, local models, or 75+ providers</li><li><strong>LSP Enabled</strong> &mdash; Automatically loads language servers for code intelligence</li><li><strong>Multi-Session</strong> &mdash; Run multiple agents in parallel on the same project</li><li><strong>Client/Server Architecture</strong> &mdash; Run the engine remotely, connect from any device</li><li><strong>Privacy First</strong> &mdash; No code or context data is stored by OpenCode</li></ul>
+<h3>Available Interfaces</h3>
+<ul><li><strong>Terminal (TUI)</strong> &mdash; The primary interface, built by Neovim users</li><li><strong>Desktop App</strong> &mdash; macOS, Windows, and Linux (beta)</li><li><strong>IDE Extension</strong> &mdash; Integrated into your favorite editor</li><li><strong>CLI</strong> &mdash; One-shot: <code class="inline">opencode run "prompt"</code></li><li><strong>Web</strong> &mdash; Browser-based via <code class="inline">opencode serve</code></li></ul>
+<div class="info-box tip"><div class="info-label">Tip</div>OpenCode is similar to Claude Code but open source, supports any provider, and has built-in LSP support. You can even use your GitHub Copilot or ChatGPT Plus subscription!</div>
+<h3>How It Works</h3>
+<p>OpenCode follows an <strong>agent loop</strong>:</p>
+<ol class="step-list"><li>You send a message (a question, task, or instruction)</li><li>The LLM analyzes the request and decides which tools to use</li><li>Tools execute actions: read files, run commands, edit code</li><li>Results are fed back to the LLM for the next step</li><li>The loop continues until the task is complete or you interrupt</li></ol>`},
+  {label:"Chapter 02 &middot; Beginner",title:"Installation",desc:"Getting OpenCode installed takes less than a minute. Choose the method that works best for you.",content:`
+<h3>One-Line Install (Recommended)</h3>
+<div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code><span class="prompt">$</span> <span class="cmd">curl</span> <span class="flag">-fsSL</span> https://opencode.ai/install <span class="str">| bash</span></code></pre></div>
+<h3>Install via Package Managers</h3>
+<div class="tab-bar"><button class="tab-btn active" onclick="switchTab(event,'install')">npm</button><button class="tab-btn" onclick="switchTab(event,'install')">Homebrew</button><button class="tab-btn" onclick="switchTab(event,'install')">Arch</button><button class="tab-btn" onclick="switchTab(event,'install')">Windows</button></div>
+<div class="tab-content active" data-group="install" data-tab="0"><div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code><span class="prompt">$</span> <span class="cmd">npm</span> install <span class="flag">-g</span> opencode-ai@latest\n<span class="comment"># or with bun, pnpm, yarn</span>\n<span class="prompt">$</span> <span class="cmd">bun</span> install <span class="flag">-g</span> opencode-ai</code></pre></div></div>
+<div class="tab-content" data-group="install" data-tab="1"><div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code><span class="comment"># Recommended tap (always up to date)</span>\n<span class="prompt">$</span> <span class="cmd">brew</span> install anomalyco/tap/opencode\n<span class="comment"># Or the official formula</span>\n<span class="prompt">$</span> <span class="cmd">brew</span> install opencode</code></pre></div></div>
+<div class="tab-content" data-group="install" data-tab="2"><div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code><span class="comment"># Arch Linux (Stable)</span>\n<span class="prompt">$</span> <span class="cmd">sudo</span> pacman <span class="flag">-S</span> opencode\n<span class="comment"># Arch Linux (Latest from AUR)</span>\n<span class="prompt">$</span> <span class="cmd">paru</span> <span class="flag">-S</span> opencode-bin</code></pre></div></div>
+<div class="tab-content" data-group="install" data-tab="3"><div class="code-block"><div class="code-header"><span class="lang">powershell</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code><span class="comment"># Using Scoop</span>\n<span class="prompt">></span> <span class="cmd">scoop</span> install opencode\n<span class="comment"># Using Chocolatey</span>\n<span class="prompt">></span> <span class="cmd">choco</span> install opencode</code></pre></div></div>
+<h3>Desktop App (Beta)</h3>
+<div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code><span class="comment"># macOS</span>\n<span class="prompt">$</span> <span class="cmd">brew</span> install <span class="flag">--cask</span> opencode-desktop\n<span class="comment"># Windows</span>\n<span class="prompt">></span> <span class="cmd">scoop</span> bucket add extras <span class="str">;</span> scoop install extras/opencode-desktop</code></pre></div>
+<div class="info-box tip"><div class="info-label">Prerequisites</div>You'll need a modern terminal like <strong>WezTerm</strong>, <strong>Alacritty</strong>, <strong>Ghostty</strong>, or <strong>Kitty</strong>. On Windows, use WSL.</div>
+<h3>Verify Installation</h3>
+<div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code><span class="prompt">$</span> <span class="cmd">opencode</span> <span class="flag">--version</span>\n<span class="comment">opencode v1.3.7</span></code></pre></div>`},
+  {label:"Chapter 03 &middot; Beginner",title:"Configuration",desc:"Connect your preferred AI provider and configure OpenCode to work with your workflow.",content:`
+<h3>Quick Setup with Zen (Recommended)</h3>
+<p>Use <strong>OpenCode Zen</strong> &mdash; curated models tested for coding agents:</p>
+<ol class="step-list"><li>Run <code class="inline">/connect</code>, select <strong>opencode</strong></li><li>Sign in at <a href="https://opencode.ai/auth" target="_blank">opencode.ai/auth</a></li><li>Copy your API key and paste it</li></ol>
+<h3>Using Other Providers</h3>
+<div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code><span class="comment"># Anthropic (Claude)</span>\n<span class="prompt">$</span> <span class="cmd">export</span> <span class="key">ANTHROPIC_API_KEY</span>=<span class="str">sk-ant-...</span>\n<span class="comment"># OpenAI (GPT)</span>\n<span class="prompt">$</span> <span class="cmd">export</span> <span class="key">OPENAI_API_KEY</span>=<span class="str">sk-...</span>\n<span class="comment"># Google (Gemini)</span>\n<span class="prompt">$</span> <span class="cmd">export</span> <span class="key">GOOGLE_API_KEY</span>=<span class="str">AIza...</span></code></pre></div>
+<h3>Config File Structure</h3>
+<div class="code-block"><div class="code-header"><span class="lang">opencode.json</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>{\n  <span class="key">"$schema"</span>: <span class="str">"https://opencode.ai/config.json"</span>,\n  <span class="key">"model"</span>: <span class="str">"anthropic/claude-sonnet-4-20250514"</span>,\n  <span class="key">"provider"</span>: {\n    <span class="key">"anthropic"</span>: {\n      <span class="key">"options"</span>: { <span class="key">"apiKey"</span>: <span class="str">"{env:ANTHROPIC_API_KEY}"</span> }\n    }\n  }\n}</code></pre></div>
+<h3>Config Locations (Precedence Order)</h3>
+<div class="table-wrap"><table><tr><th>Priority</th><th>Location</th><th>Purpose</th></tr><tr><td>1 (lowest)</td><td><code class="inline">.well-known/opencode</code></td><td>Org defaults</td></tr><tr><td>2</td><td><code class="inline">~/.config/opencode/opencode.json</code></td><td>User prefs</td></tr><tr><td>3</td><td><code class="inline">OPENCODE_CONFIG</code> env</td><td>Custom overrides</td></tr><tr><td>4 (highest)</td><td><code class="inline">opencode.json</code> in project</td><td>Project settings</td></tr></table></div>
+<div class="info-box tip"><div class="info-label">Tip</div>Configs are <strong>merged</strong>, not replaced. Use <code class="inline">{env:VAR}</code> and <code class="inline">{file:path}</code> for variable substitution.</div>
+<h3>Initialize Your Project</h3>
+<div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code><span class="prompt">$</span> <span class="cmd">cd</span> /path/to/project\n<span class="prompt">$</span> <span class="cmd">opencode</span>\n<span class="comment"># Inside TUI:</span>\n<span class="prompt">></span> <span class="cmd">/init</span></code></pre></div>
+<p>The <code class="inline">/init</code> command creates an <code class="inline">AGENTS.md</code> file. <strong>Commit it to Git.</strong></p>`},
+  {label:"Chapter 04 &middot; Beginner",title:"Core Concepts",desc:"Understand the fundamental building blocks: sessions, agents, tools, and the agent loop.",content:`
+<h3>Sessions</h3>
+<p>A <strong>session</strong> is a conversation with OpenCode containing messages, tool calls, and snapshots for undo/redo. Run multiple sessions with <code class="inline">Ctrl+X &rarr; N</code>.</p>
+<h3>Agents</h3>
+<div class="table-wrap"><table><tr><th>Agent</th><th>Mode</th><th>Purpose</th></tr><tr><td><strong>Build</strong></td><td>Full access</td><td>Default for all development work</td></tr><tr><td><strong>Plan</strong></td><td>Read-only + Ask</td><td>Analysis and planning</td></tr></table></div>
+<p>Switch with <code class="inline">Tab</code>. Current agent shown in lower-right.</p>
+<h3>The Agent Loop</h3>
+<ol class="step-list"><li><strong>User sends a message</strong></li><li><strong>LLM plans</strong> which files to read, tools to use</li><li><strong>Agent reads files</strong> with <code class="inline">read</code>/<code class="inline">glob</code></li><li><strong>Agent edits</strong> with <code class="inline">edit</code> tool</li><li><strong>Agent runs commands</strong> with <code class="inline">bash</code></li><li><strong>Agent responds</strong> with summary</li></ol>
+<h3>Tools Overview</h3>
+<div class="table-wrap"><table><tr><th>Tool</th><th>Description</th></tr><tr><td><code class="inline">bash</code></td><td>Execute shell commands</td></tr><tr><td><code class="inline">read</code></td><td>Read file contents</td></tr><tr><td><code class="inline">edit</code></td><td>Edit files with string replacement</td></tr><tr><td><code class="inline">write</code></td><td>Create/overwrite files</td></tr><tr><td><code class="inline">glob</code></td><td>Find files by pattern</td></tr><tr><td><code class="inline">grep</code></td><td>Search content with regex</td></tr><tr><td><code class="inline">webfetch</code></td><td>Fetch web content</td></tr><tr><td><code class="inline">websearch</code></td><td>Search the web</td></tr><tr><td><code class="inline">question</code></td><td>Ask user for input</td></tr><tr><td><code class="inline">todowrite</code></td><td>Manage task lists</td></tr></table></div>
+<div class="info-box success"><div class="info-label">Best Practice</div>Use <strong>Plan mode</strong> first to get a strategy, then <strong>Build mode</strong> to execute.</div>`},
+  {label:"Chapter 05 &middot; Intermediate",title:"Working with Agents",desc:"Master the agent system: Build vs Plan, custom agents, and subagents.",content:`
+<h3>Primary Agents: Build &amp; Plan</h3>
+<p><strong>Build</strong> has full access to all tools. <strong>Plan</strong> requires approval for edits and bash commands.</p>
+<div class="info-box tip"><div class="info-label">Workflow</div>Start in Plan &rarr; review &rarr; switch to Build &rarr; "Go ahead."</div>
+<h3>Subagents</h3>
+<div class="table-wrap"><table><tr><th>Subagent</th><th>Purpose</th><th>Invoke</th></tr><tr><td><strong>General</strong></td><td>Complex research &amp; multi-step tasks</td><td><code class="inline">@general</code></td></tr><tr><td><strong>Explore</strong></td><td>Fast, read-only codebase exploration</td><td><code class="inline">@explore</code></td></tr></table></div>
+<h3>Creating Custom Agents</h3>
+<div class="code-block"><div class="code-header"><span class="lang">~/.config/opencode/agents/review.md</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>---\ndescription: Reviews code for quality\nmode: subagent\nmodel: anthropic/claude-sonnet-4-20250514\ntemperature: 0.1\npermission:\n  edit: deny\n  bash:\n    "*": ask\n    "git diff": allow\n---\nYou are a code reviewer. Focus on:\n- Code quality and best practices\n- Potential bugs and edge cases\n- Performance and security</code></pre></div>
+<p>Or use: <code class="inline">opencode agent create</code></p>
+<h3>Agent Options</h3>
+<div class="table-wrap"><table><tr><th>Option</th><th>Description</th></tr><tr><td><code class="inline">description</code></td><td>What it does (required)</td></tr><tr><td><code class="inline">mode</code></td><td>primary / subagent / all</td></tr><tr><td><code class="inline">model</code></td><td>Override model</td></tr><tr><td><code class="inline">temperature</code></td><td>0.0 (focused) to 1.0 (creative)</td></tr><tr><td><code class="inline">steps</code></td><td>Max iterations</td></tr><tr><td><code class="inline">permission</code></td><td>Fine-grained tool access</td></tr></table></div>`},
+  {label:"Chapter 06 &middot; Intermediate",title:"Tools Deep Dive",desc:"Every built-in tool explained with practical examples.",content:`
+<h3>File Operations</h3>
+<div class="code-block"><div class="code-header"><span class="lang">Example Prompts</span></div><pre><code><span class="prompt">></span> How is auth handled in @src/middleware/auth.ts\n<span class="prompt">></span> Show me lines 50-100 of @src/index.ts\n<span class="prompt">></span> Find all TypeScript files in src/components\n<span class="prompt">></span> Search for all TODO comments</code></pre></div>
+<h3>Editing Files</h3>
+<p>The <code class="inline">edit</code> tool uses <strong>exact string replacement</strong> for precise, predictable changes.</p>
+<h3>Permissions System</h3>
+<div class="code-block"><div class="code-header"><span class="lang">opencode.json</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>{\n  <span class="key">"permission"</span>: {\n    <span class="key">"edit"</span>: <span class="str">"ask"</span>,\n    <span class="key">"bash"</span>: {\n      <span class="key">"*"</span>: <span class="str">"ask"</span>,\n      <span class="key">"git status *"</span>: <span class="str">"allow"</span>,\n      <span class="key">"git diff *"</span>: <span class="str">"allow"</span>\n    },\n    <span class="key">"webfetch"</span>: <span class="str">"allow"</span>\n  }\n}</code></pre></div>
+<h3>Tool Reference</h3>
+<div class="table-wrap"><table><tr><th>Tool</th><th>Key</th><th>What It Does</th></tr><tr><td><code class="inline">bash</code></td><td><code class="inline">bash</code></td><td>Run shell commands</td></tr><tr><td><code class="inline">edit</code></td><td><code class="inline">edit</code></td><td>Replace strings in files</td></tr><tr><td><code class="inline">write</code></td><td><code class="inline">edit</code></td><td>Create/overwrite files</td></tr><tr><td><code class="inline">read</code></td><td><code class="inline">read</code></td><td>Read file contents</td></tr><tr><td><code class="inline">grep</code></td><td><code class="inline">grep</code></td><td>Search content with regex</td></tr><tr><td><code class="inline">glob</code></td><td><code class="inline">glob</code></td><td>Find files by pattern</td></tr><tr><td><code class="inline">webfetch</code></td><td><code class="inline">webfetch</code></td><td>Fetch URLs</td></tr><tr><td><code class="inline">websearch</code></td><td><code class="inline">websearch</code></td><td>Search the web</td></tr><tr><td><code class="inline">question</code></td><td><code class="inline">question</code></td><td>Ask user questions</td></tr><tr><td><code class="inline">todowrite</code></td><td><code class="inline">todowrite</code></td><td>Manage tasks</td></tr><tr><td><code class="inline">lsp</code></td><td><code class="inline">lsp</code></td><td>LSP operations (experimental)</td></tr></table></div>
+<div class="info-box tip"><div class="info-label">Tip</div>Glob patterns in bash permissions: the <strong>last matching rule wins</strong>. Put broad rules first, specific ones after.</div>`},
+  {label:"Chapter 07 &middot; Intermediate",title:"Commands &amp; Automation",desc:"Create custom commands to automate repetitive tasks.",content:`
+<h3>Creating Commands</h3>
+<div class="code-block"><div class="code-header"><span class="lang">.opencode/commands/test.md</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>---\ndescription: Run tests with coverage\nagent: build\n---\nRun the full test suite with coverage report.\nFocus on failing tests and suggest fixes.</code></pre></div>
+<p>Run with <code class="inline">/test</code> inside OpenCode.</p>
+<h3>Commands with Arguments</h3>
+<div class="code-block"><div class="code-header"><span class="lang">.opencode/commands/component.md</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>---\ndescription: Create a new React component\n---\nCreate a new React component named $ARGUMENTS with TypeScript.\nInclude proper typing and basic structure.\nUse patterns from @src/components/Button.tsx as reference.</code></pre></div>
+<p>Usage: <code class="inline">/component UserProfile</code>. Positional args: <code class="inline">$1</code>, <code class="inline">$2</code>, <code class="inline">$3</code>...</p>
+<h3>Shell Output in Commands</h3>
+<div class="code-block"><div class="code-header"><span class="lang">.opencode/commands/review-changes.md</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>---\ndescription: Review recent changes\n---\nRecent commits:\n!\`git log --oneline -10\`\nReview and suggest improvements.</code></pre></div>
+<h3>Command Options</h3>
+<div class="table-wrap"><table><tr><th>Option</th><th>Description</th></tr><tr><td><code class="inline">template</code></td><td>Prompt template (required)</td></tr><tr><td><code class="inline">description</code></td><td>Shown in command list</td></tr><tr><td><code class="inline">agent</code></td><td>Which agent executes it</td></tr><tr><td><code class="inline">model</code></td><td>Override model</td></tr><tr><td><code class="inline">subtask</code></td><td>Run as subagent to keep context clean</td></tr></table></div>
+<div class="info-box success"><div class="info-label">Best Practice</div>Build a command library: <code class="inline">/test</code>, <code class="inline">/review</code>, <code class="inline">/deploy-check</code>. Commit to Git for the whole team.</div>`},
+  {label:"Chapter 08 &middot; Advanced",title:"Advanced Setup",desc:"MCP servers, LSP integration, plugins, and enterprise features.",content:`
+<h3>MCP Servers</h3>
+<div class="code-block"><div class="code-header"><span class="lang">opencode.json</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>{\n  <span class="key">"mcp"</span>: {\n    <span class="key">"my-database"</span>: {\n      <span class="key">"type"</span>: <span class="str">"stdio"</span>,\n      <span class="key">"command"</span>: <span class="str">"npx"</span>,\n      <span class="key">"args"</span>: [<span class="str">"@modelcontextprotocol/server-postgres"</span>]\n    }\n  }\n}</code></pre></div>
+<h3>LSP Integration (Experimental)</h3>
+<div class="code-block"><div class="code-header"><span class="lang">bash</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code><span class="prompt">$</span> <span class="key">OPENCODE_EXPERIMENTAL_LSP_TOOL</span>=<span class="str">true</span> opencode</code></pre></div>
+<h3>Plugins</h3>
+<div class="code-block"><div class="code-header"><span class="lang">opencode.json</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>{ <span class="key">"plugin"</span>: [<span class="str">"opencode-helicone-session"</span>] }</code></pre></div>
+<h3>Compaction &amp; Context</h3>
+<div class="code-block"><div class="code-header"><span class="lang">opencode.json</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>{\n  <span class="key">"compaction"</span>: {\n    <span class="key">"auto"</span>: true,\n    <span class="key">"prune"</span>: true,\n    <span class="key">"reserved"</span>: 10000\n  }\n}</code></pre></div>
+<p>Manual: <code class="inline">Ctrl+X &rarr; C</code></p>
+<h3>Formatters</h3>
+<div class="code-block"><div class="code-header"><span class="lang">opencode.json</span><button class="copy-btn" onclick="copyCode(this)">Copy</button></div><pre><code>{\n  <span class="key">"formatter"</span>: {\n    <span class="key">"prettier"</span>: {\n      <span class="key">"command"</span>: [<span class="str">"npx"</span>,<span class="str">"prettier"</span>,<span class="str">"--write"</span>,<span class="str">"$FILE"</span>],\n      <span class="key">"extensions"</span>: [<span class="str">".js"</span>,<span class="str">".ts"</span>,<span class="str">".tsx"</span>]\n    }\n  }\n}</code></pre></div>
+<h3>Sharing Sessions</h3>
+<div class="code-block"><div class="code-header"><span class="lang">bash</span></div><pre><code><span class="prompt">></span> <span class="cmd">/share</span>  <span class="comment"># Creates shareable link</span></code></pre></div>
+<div class="info-box warning"><div class="info-label">Enterprise</div>OpenCode stores <strong>no code or context data</strong>. Safe for privacy-sensitive environments.</div>`}
+];
+
+const quizData=[
+  {q:"What is OpenCode?",opts:["A chatbot like ChatGPT","An open-source AI coding agent","An IDE like VS Code","A programming language"],ans:1},
+  {q:"Which key switches between Build and Plan agents?",opts:["Ctrl+A","Escape","Tab","Ctrl+X"],ans:2},
+  {q:"What does /init do?",opts:["Installs OpenCode","Creates a new project","Analyzes project and creates AGENTS.md","Starts a new session"],ans:2},
+  {q:"Which file stores project-specific config?",opts:["package.json","tsconfig.json","opencode.json","config.yaml"],ans:2},
+  {q:"What does the Plan agent do differently?",opts:["Uses a different LLM","Restricts edits and bash commands","Only works in terminal","Runs faster"],ans:1},
+  {q:"How do you reference a file in your prompt?",opts:["#filename","@filename","$filename","!filename"],ans:1},
+  {q:"Which permission level requires user approval?",opts:["allow","auto","ask","deny"],ans:2},
+  {q:"What is the default leader key?",opts:["Ctrl+A","Ctrl+C","Ctrl+X","Ctrl+Z"],ans:2},
+  {q:"How do you invoke the Explore subagent?",opts:["/explore","@explore","Tab + E","Ctrl+X -> E"],ans:1},
+  {q:"Which command undoes the last agent action?",opts:["/redo","/undo","/revert","/rollback"],ans:1}
+];
+
+const challengesData=[
+  {title:"Add a Feature",scenario:"You want OpenCode to implement soft-delete for notes and create a new trash screen. You're not sure how it should work yet. What's the best approach?",opts:["Just tell Build agent to do it","Switch to Plan mode, describe the feature, review the plan, then switch to Build","Use @explore to find all note files, then edit them manually","Run opencode run with a long prompt"],ans:1,feedback:"Plan first, then Build. This lets you review the strategy before any code changes."},
+  {title:"Debug an Error",scenario:"Your app crashes with 'TypeError: Cannot read properties of undefined (reading map)' at line 42 of users.ts. What's the best prompt?",opts:["Fix the bug","I'm getting TypeError: Cannot read properties of undefined (reading map) at @src/api/users.ts:42","@general find the bug","Run /help first"],ans:1,feedback:"Specific error + file reference = fast, accurate diagnosis. Always include the file path with @."},
+  {title:"Quick One-Shot",scenario:"You need a quick commit message for staged changes without launching the full TUI. Which command?",opts:["opencode /commit","opencode run \"Create a git commit for staged changes\"","git commit --ai","opencode commit"],ans:1,feedback:"opencode run lets you send a one-shot prompt without entering the TUI."},
+  {title:"Read-Only Review",scenario:"You want OpenCode to review your code without making any changes. What do you do?",opts:["Set permission edit to deny globally","Switch to Plan mode or use @explore","Just ask nicely in Build mode","Create a new agent each time"],ans:1,feedback:"Plan mode is read-only by default. @explore is also read-only. Both prevent unwanted changes."},
+  {title:"Custom Workflow",scenario:"Your team runs the same code review checklist every PR. How do you automate this?",opts:["Type the checklist every time","Create a /review command in .opencode/commands/review.md with your checklist as the template","Use a shell alias","There's no way to do this"],ans:1,feedback:"Custom commands are reusable prompts. Create once, run with /command-name forever."},
+  {title:"Control Permissions",scenario:"You want OpenCode to auto-approve git commands but ask before any npm/publish commands. How?",opts:["You can't do this","Set bash permission to '*' with specific overrides: '*': allow, 'npm *': ask","Disable the bash tool","Use Plan mode only"],ans:1,feedback:"Bash permissions support glob patterns. Last matching rule wins, so put broad rules first."}
+];
+
+let currentLesson=-1;
+let completedLessons=new Set(JSON.parse(localStorage.getItem('oc_progress')||'[]'));
+let currentTheme=localStorage.getItem('oc_theme')||'dark';
+let searchFocusedIdx=-1;
+
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  document.getElementById('themeBtn').innerHTML=t==='dark'?'&#9790;':'&#9788;';
+  currentTheme=t;
+  localStorage.setItem('oc_theme',t);
+}
+applyTheme(currentTheme);
+function cycleTheme(){applyTheme(currentTheme==='dark'?'light':'dark')}
+
+function showHome(){
+  document.getElementById('homeView').style.display='';
+  document.querySelectorAll('.lesson-view').forEach(v=>v.classList.remove('active'));
+  currentLesson=-1;updateSidebar();updateCheckmarks();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function showLesson(idx){
+  if(idx<0||idx>=lessons.length)return;
+  currentLesson=idx;const l=lessons[idx];
+  document.getElementById('homeView').style.display='none';
+  document.querySelectorAll('.lesson-view').forEach(v=>v.classList.remove('active'));
+  const lv=document.getElementById('lessonView');lv.classList.add('active');
+  document.getElementById('lessonLabel').innerHTML=l.label;
+  document.getElementById('lessonTitle').textContent=l.title;
+  document.getElementById('lessonDesc').innerHTML=l.desc;
+  document.getElementById('lessonContent').innerHTML=l.content;
+  document.getElementById('prevBtn').style.visibility=idx===0?'hidden':'visible';
+  document.getElementById('nextBtn').textContent=idx===lessons.length-1?'Back to Lessons':'Next \u2192';
+  completedLessons.add(idx);localStorage.setItem('oc_progress',JSON.stringify([...completedLessons]));
+  updateProgress();updateSidebar();updateCheckmarks();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function showPage(page){
+  document.getElementById('homeView').style.display='none';
+  document.querySelectorAll('.lesson-view').forEach(v=>v.classList.remove('active'));
+  document.getElementById(page+'View').classList.add('active');
+  currentLesson=-1;updateSidebar();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function prevLesson(){showLesson(currentLesson-1)}
+function nextLesson(){currentLesson===lessons.length-1?showHome():showLesson(currentLesson+1)}
+function updateProgress(){
+  document.getElementById('progressBar').style.width=Math.round(completedLessons.size/lessons.length*100)+'%';
+}
+function updateCheckmarks(){
+  for(let i=0;i<lessons.length;i++){
+    const el=document.getElementById('chk'+i);
+    if(el)el.classList.toggle('done',completedLessons.has(i));
+  }
+}
+function updateSidebar(){
+  document.querySelectorAll('.sidebar-nav a').forEach((a,i)=>a.classList.toggle('active',i-1===currentLesson));
+}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open')}
+function closeSidebar(){document.getElementById('sidebar').classList.remove('open')}
+function switchTab(e,group){
+  const bar=e.target.parentElement;const btns=bar.querySelectorAll('.tab-btn');
+  const idx=[...btns].indexOf(e.target);btns.forEach(b=>b.classList.remove('active'));e.target.classList.add('active');
+  document.querySelectorAll(`.tab-content[data-group="${group}"]`).forEach((tc,i)=>tc.classList.toggle('active',i===idx));
+}
+function copyCode(btn){
+  const pre=btn.closest('.code-block').querySelector('pre');
+  navigator.clipboard.writeText(pre.textContent).then(()=>{btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy',1500)});
+}
+function toggleWorkflow(el){
+  const steps=el.nextElementSibling;const isOpen=steps.classList.contains('open');
+  steps.classList.toggle('open');el.querySelector('span').innerHTML=isOpen?'&#9662;':'&#9652;';
+}
+
+// Search
+const searchable=lessons.map((l,i)=>({type:'lesson',idx:i,title:l.title,text:l.title+' '+l.desc+' '+l.content.replace(/<[^>]*>/g,' ')}));
+function openSearch(){document.getElementById('searchOverlay').classList.add('open');document.getElementById('searchInput').value='';document.getElementById('searchInput').focus();renderSearchResults('');searchFocusedIdx=-1}
+function closeSearch(){document.getElementById('searchOverlay').classList.remove('open')}
+function renderSearchResults(q){
+  const r=document.getElementById('searchResults');
+  if(!q.trim()){r.innerHTML='<div class="search-empty">Type to search across all lessons...</div>';return}
+  const ql=q.toLowerCase();const matches=searchable.filter(s=>s.text.toLowerCase().includes(ql)).slice(0,8);
+  if(!matches.length){r.innerHTML='<div class="search-empty">No results found</div>';return}
+  r.innerHTML=matches.map((m,i)=>{
+    const t=m.title;const idx=m.text.toLowerCase().indexOf(ql);const start=Math.max(0,idx-30);const end=Math.min(m.text.length,idx+ql.length+30);
+    const snippet=(start>0?'...':'')+m.text.substring(start,end).replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`,'gi'),'<em>$1</em>')+(end<m.text.length?'...':'');
+    return `<div class="search-result" data-idx="${m.idx}" onclick="showLesson(${m.idx});closeSearch()"><span class="sr-num">${String(m.idx+1).padStart(2,'0')}</span><span class="sr-text">${t}<br><small style="color:var(--text-3)">${snippet}</small></span></div>`;
+  }).join('');
+}
+document.getElementById('searchInput').addEventListener('input',e=>renderSearchResults(e.target.value));
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openSearch()}
+  if(e.key==='Escape')closeSearch();
+});
+
+// Terminal
+const termResponses={
+  'opencode':'\n  \u250c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n  \u2502  OpenCode v1.3.7 - AI coding agent       \u2502\n  \u2502  Agent: build | Model: claude-sonnet-4      \u2502\n  \u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n\n  Ready. Type your message or /help for commands.',
+  'opencode run "Add a login page"':'\n  Running one-shot prompt...\n\n  [tool: read] Reading project structure...\n  [tool: glob] Finding relevant files...\n  [tool: edit] Creating src/pages/Login.tsx\n  [tool: edit] Creating src/components/LoginForm.tsx\n  [tool: edit] Updating src/App.tsx\n  [tool: bash] npm run typecheck...\n\n  Done! Created login page with routing.',
+  '/init':'\n  Analyzing project...\n\n  Detected: TypeScript, React, Node.js\n  Package manager: npm\n  Framework: Next.js\n\n  Created AGENTS.md with:\n  - Project overview and tech stack\n  - Build and test commands\n  - Code conventions\n\n  Tip: Commit AGENTS.md to Git.',
+  '/help':'\n  Commands:\n  /init     Initialize project\n  /help     Show help\n  /undo     Undo last change\n  /redo     Redo undone change\n  /share    Share session\n  /connect  Configure provider\n  /compact  Compact context\n\n  Tab       Switch agent\n  Ctrl+X-N  New session\n  Ctrl+X-M  Switch model\n  Escape    Interrupt',
+  '/share':'\n  Sharing session...\n\n  Link created: https://opencode.ai/s/xK9f2mP7\n  Copied to clipboard!',
+  '/undo':'\n  Undoing last change...\n\n  Reverted:\n  - src/api/users.ts\n  - src/middleware/auth.ts\n\n  Message restored for editing.',
+  'Tab':'\n  Switched agent: build -> plan\n\n  Plan mode active.\n  - Edits require approval\n  - Bash requires approval\n\n  Tab again to switch back.',
+  'opencode models':'\n  Available models:\n\n  anthropic/claude-sonnet-4\n  anthropic/claude-haiku-4\n  openai/gpt-4o\n  google/gemini-2.0-flash\n  opencode/gpt-5.1-codex',
+  'opencode --version':'\n  opencode v1.3.7'
+};
+function simulate(cmd){
+  const body=document.getElementById('termBody');
+  const line=document.createElement('div');line.className='line';
+  line.innerHTML=`<span class="ps1">$</span><span class="input">${escapeHtml(cmd)}</span>`;
+  body.appendChild(line);
+  const resp=termResponses[cmd]||`\n  Unknown command: ${escapeHtml(cmd)}\n  Try: opencode, /init, /help, /share, /undo, Tab`;
+  const out=document.createElement('div');out.className='line output';out.innerHTML=resp;
+  body.appendChild(out);body.appendChild(Object.assign(document.createElement('div'),{className:'line output',innerHTML:'&nbsp;'}));
+  body.scrollTop=body.scrollHeight;document.getElementById('termInput').value='';
+}
+document.getElementById('termInput').addEventListener('keydown',e=>{if(e.key==='Enter'){const v=e.target.value.trim();if(v)simulate(v)}});
+function escapeHtml(t){return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+// Quiz
+function buildQuiz(){
+  const c=document.getElementById('quizContainer');c.innerHTML='';
+  quizData.forEach((q,i)=>{
+    const card=document.createElement('div');card.className='quiz-card';card.id=`quiz-${i}`;
+    card.innerHTML=`<div class="q-num">Question ${i+1} of ${quizData.length}</div><h4>${q.q}</h4><div class="quiz-options">${q.opts.map((o,j)=>`<button class="quiz-opt" onclick="answerQuiz(${i},${j},this)">${o}</button>`).join('')}</div><div class="quiz-result" id="qr-${i}"></div>`;
+    c.appendChild(card);
+  });
+}
+let quizAnswered={};
+function answerQuiz(qi,oi,btn){
+  if(quizAnswered[qi]!==undefined)return;quizAnswered[qi]=oi;
+  const correct=quizData[qi].ans;const card=document.getElementById(`quiz-${qi}`);
+  card.querySelectorAll('.quiz-opt').forEach((b,j)=>{
+    if(j===correct)b.classList.add('correct');else if(j===oi&&j!==correct)b.classList.add('wrong');b.classList.add('disabled');
+  });
+  const res=document.getElementById(`qr-${qi}`);res.className='quiz-result show '+(oi===correct?'pass':'fail');
+  res.textContent=oi===correct?'Correct!':`Incorrect. Answer: ${quizData[qi].opts[correct]}`;
+  if(Object.keys(quizAnswered).length===quizData.length){
+    const score=Object.entries(quizAnswered).filter(([qi,oi])=>quizData[qi].ans===oi).length;
+    const el=document.getElementById('quizScore');el.style.display='';
+    el.innerHTML=score>=7?`<span style="color:var(--green)">Score: ${score}/${quizData.length} &mdash; Passed!</span>`:`<span style="color:var(--red)">Score: ${score}/${quizData.length} &mdash; Try again!</span>`;
+  }
+}
+function resetQuiz(){quizAnswered={};document.getElementById('quizScore').style.display='none';buildQuiz()}
+
+// Challenges
+function buildChallenges(){
+  const c=document.getElementById('challengesContainer');c.innerHTML='';
+  challengesData.forEach((ch,i)=>{
+    const card=document.createElement('div');card.className='challenge-card';card.id=`ch-${i}`;
+    card.innerHTML=`<h4>&#127919; ${ch.title}</h4><div class="scenario">${ch.scenario}</div><div class="challenge-opts">${ch.opts.map((o,j)=>`<button class="challenge-opt" onclick="answerChallenge(${i},${j},this)">${o}</button>`).join('')}</div><div class="challenge-feedback" id="cfb-${i}"></div>`;
+    c.appendChild(card);
+  });
+}
+function answerChallenge(ci,oi,btn){
+  const ch=challengesData[ci];const card=document.getElementById(`ch-${ci}`);
+  card.querySelectorAll('.challenge-opt').forEach((b,j)=>{
+    if(j===ch.ans)b.classList.add('correct');else if(j===oi&&j!==ch.ans)b.classList.add('wrong');b.classList.add('disabled');
+  });
+  const fb=document.getElementById(`cfb-${ci}`);fb.className='challenge-feedback show '+(oi===ch.ans?'pass':'fail');
+  fb.textContent=(oi===ch.ans?'Correct! ':'Not quite. ')+ch.feedback;
+}
+
+// Agent loop animation
+let loopInterval;
+function animateLoop(){
+  const nodes=document.querySelectorAll('#agentLoop .loop-node');
+  let active=0;clearInterval(loopInterval);
+  loopInterval=setInterval(()=>{nodes.forEach((n,i)=>n.classList.toggle('active-node',i===active));active=(active+1)%nodes.length},2000);
+}
+
+// Init
+buildQuiz();buildChallenges();updateProgress();updateCheckmarks();animateLoop();
+
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:.1});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+</script>
+</body>
+</html>
