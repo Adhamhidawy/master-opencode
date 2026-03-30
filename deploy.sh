@@ -20,7 +20,7 @@ else
   echo ""
   echo "No remote configured."
   echo "Create a repo on GitHub, then run:"
-  echo "  git remote add origin https://github.com/YOU/master-opencode.git"
+  echo "  git remote add origin https://github.com/adhamhidawy/master-opencode.git"
   echo "  ./deploy.sh"
   exit 1
 fi
@@ -44,7 +44,7 @@ if command -v gh &>/dev/null; then
   echo "Pages may already be configured. Check your repo settings."
   echo ""
   echo "Your site will be live at:"
-  gh api "repos/{owner}/{repo}/pages" --jq '.html_url' 2>/dev/null || echo "https://YOUR_USERNAME.github.io/master-opencode/"
+  gh api "repos/{owner}/{repo}/pages" --jq '.html_url' 2>/dev/null || echo "https://adhamhidawy.github.io/master-opencode/"
 else
   echo ""
   echo "gh CLI not found. To enable GitHub Pages:"
