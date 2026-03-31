@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Moon, Sun, Menu, Search } from "lucide-react";
 import { useTheme } from "@/components/providers/theme-provider";
+import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 
 interface NavbarProps {
   onToggleSidebar: () => void;
@@ -10,6 +11,7 @@ interface NavbarProps {
 
 export function Navbar({ onToggleSidebar }: NavbarProps) {
   const { theme, toggleTheme } = useTheme();
+  const { isSignedIn } = useUser();
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-bg/85 backdrop-blur-md transition-all">
@@ -40,6 +42,11 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
           <Link href="/quiz" className="hidden rounded-lg px-3.5 py-1.5 text-[.85rem] font-medium text-text-2 no-underline transition-all hover:bg-bg-3 hover:text-text md:block">
             Quiz
           </Link>
+          {isSignedIn && (
+            <Link href="/progress" className="hidden rounded-lg px-3.5 py-1.5 text-[.85rem] font-medium text-text-2 no-underline transition-all hover:bg-bg-3 hover:text-text md:block">
+              Progress
+            </Link>
+          )}
 
           <button
             onClick={() => document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true }))}
@@ -49,6 +56,22 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
             Search
             <kbd className="rounded border border-border bg-bg-3 px-1.5 py-0.5 text-[.7rem]">Ctrl K</kbd>
           </button>
+
+          {isSignedIn ? (
+            <UserButton
+              appearance={{
+                elements: {
+                  avatarBox: "h-9 w-9 rounded-lg",
+                },
+              }}
+            />
+          ) : (
+            <SignInButton mode="modal">
+              <button className="flex items-center gap-2 rounded-lg bg-accent px-4 py-2 text-[.82rem] font-semibold text-white transition-all hover:bg-accent-2">
+                Sign in
+              </button>
+            </SignInButton>
+          )}
 
           <button
             onClick={toggleTheme}
