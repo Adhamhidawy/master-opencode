@@ -12,6 +12,13 @@ export const metadata: Metadata = {
   title: "Master OpenCode",
   description:
     "The interactive, hands-on guide to mastering OpenCode — the open-source AI coding agent with 133K+ GitHub stars.",
+  openGraph: {
+    title: "Master OpenCode",
+    description:
+      "The interactive, hands-on guide to mastering OpenCode — the open-source AI coding agent with 133K+ GitHub stars.",
+    url: "https://master-opencode.vercel.app",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
