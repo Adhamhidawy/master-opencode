@@ -3,6 +3,9 @@ import Link from "next/link";
 import { lessons } from "@/data/lessons";
 import { SectionRenderer } from "@/components/ui/section-renderer";
 import { LessonNav } from "@/components/ui/lesson-nav";
+import { MarkCompleteButton } from "@/components/ui/mark-complete-button";
+import { auth } from "@clerk/nextjs/server";
+import { getUserProgress } from "@/app/actions/progress";
 import type { Metadata } from "next";
 
 export function generateStaticParams() {
@@ -35,6 +38,11 @@ export default async function LessonPage({
   const lesson = lessons[idx];
   const prevSlug = idx > 0 ? lessons[idx - 1].slug : null;
   const nextSlug = idx < lessons.length - 1 ? lessons[idx + 1].slug : null;
+
+  const { userId } = await auth();
+  const progress = userId ? await getUserProgress() : null;
+  const isCompleted = progress?.completedLessons.includes(slug) ?? false;
+
   return (
     <div className="mx-auto max-w-[900px] px-6 pb-20 pt-28">
       <Link
@@ -55,6 +63,7 @@ export default async function LessonPage({
           <SectionRenderer key={i} section={section} />
         ))}
       </div>
+      <MarkCompleteButton slug={slug} initialCompleted={isCompleted} />
       <LessonNav prevSlug={prevSlug} nextSlug={nextSlug} />
     </div>
   );

@@ -1,10 +1,13 @@
 "use client";
 
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useTransition } from "react";
 import Link from "next/link";
 import { quizQuestions } from "@/data/quiz";
 import type { QuizQuestion } from "@/types/quiz";
 import { cn } from "@/lib/utils";
+import { saveQuizScore as saveQuizScoreLocal } from "@/lib/progress-local";
+import { saveQuizScore as saveQuizScoreServer } from "@/app/actions/progress";
+import { useUser } from "@clerk/nextjs";
 
 type QuizState = {
   phase: "question" | "result";
@@ -77,6 +80,8 @@ export default function QuizFlow() {
   const [state, dispatch] = useReducer(quizReducer, initialState);
   const { phase, currentIndex, answers, selectedAnswer, isAnswered, isAnimating } =
     state;
+  const { isSignedIn } = useUser();
+  const [, startTransition] = useTransition();
 
   const currentQuestion: QuizQuestion = quizQuestions[currentIndex];
   const correctCount = answers.filter(
@@ -106,6 +111,18 @@ export default function QuizFlow() {
       return () => clearTimeout(timer);
     }
   }, [isAnimating]);
+
+  // Auto-save score on result screen
+  useEffect(() => {
+    if (phase === "result") {
+      saveQuizScoreLocal(correctCount);
+      if (isSignedIn) {
+        startTransition(() => {
+          saveQuizScoreServer(correctCount);
+        });
+      }
+    }
+  }, [phase, correctCount, isSignedIn, startTransition]);
 
   if (phase === "result") {
     const passed = correctCount >= 7;

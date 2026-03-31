@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import type { Challenge } from "@/types/challenge";
+import { saveChallengeResult as saveLocal } from "@/lib/progress-local";
+import { saveChallengeResults as saveChallengeResultsServer } from "@/app/actions/progress";
+import { useUser } from "@clerk/nextjs";
 
 interface ChallengeCardProps {
   challenge: Challenge;
@@ -10,11 +13,23 @@ interface ChallengeCardProps {
 export function ChallengeCard({ challenge }: ChallengeCardProps) {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const [showResult, setShowResult] = useState(false);
+  const { isSignedIn } = useUser();
+  const [, startTransition] = useTransition();
 
   const handleOptionClick = (index: number) => {
     if (showResult) return; // Already answered
     setSelectedAnswer(index);
     setShowResult(true);
+
+    // Save progress on correct answer
+    if (index === challenge.correctIndex) {
+      saveLocal(challenge.id);
+      if (isSignedIn) {
+        startTransition(() => {
+          saveChallengeResultsServer([challenge.id]);
+        });
+      }
+    }
   };
 
   const isCorrect = selectedAnswer === challenge.correctIndex;
