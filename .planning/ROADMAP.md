@@ -44,7 +44,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 Plans:
 - [x] 02-01-PLAN.md — Challenges page (/challenges) with 6 interactive scenario cards
 - [x] 02-02-PLAN.md — Quiz page (/quiz) with 10 questions, useReducer, animated transitions, scoring
-- [ ] 02-03-PLAN.md — Global search (Ctrl+K) with fuse.js + animated agent loop on homepage
+- [x] 02-03-PLAN.md — Global search (Ctrl+K) with fuse.js + animated agent loop on homepage
 **Note**: INTR-01 (terminal simulator /playground) deferred — not in user's Phase 2 feature scope. INTR-03 (theme toggle) already complete from Phase 1.
 **UI hint**: yes
 
@@ -67,6 +67,6 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation & Content | 0/? | Not started | - |
-| 2. Interactive Learning | 2/3 | In Progress |  |
+| 1. Foundation & Content | 3/3 | Complete | 2026-03-30 |
+| 2. Interactive Learning | 3/3 | Complete | 2026-03-31 |
 | 3. Auth & Persistent Progress | 0/? | Not started | - |
