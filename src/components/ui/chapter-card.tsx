@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Lesson } from "@/types/lesson";
 import { cn } from "@/lib/utils";
+import { LessonProgressBadge } from "./lesson-progress";
 
 const difficultyStyles = {
   beginner: "bg-green/10 text-green",
@@ -8,7 +9,7 @@ const difficultyStyles = {
   advanced: "bg-orange/10 text-orange",
 };
 
-export function ChapterCard({ lesson }: { lesson: Lesson }) {
+export function ChapterCard({ lesson, completed }: { lesson: Lesson; completed?: boolean }) {
   return (
     <Link
       href={`/lessons/${lesson.slug}`}
@@ -27,6 +28,7 @@ export function ChapterCard({ lesson }: { lesson: Lesson }) {
       >
         {lesson.difficulty.charAt(0).toUpperCase() + lesson.difficulty.slice(1)}
       </span>
+      <LessonProgressBadge slug={lesson.slug} serverCompleted={completed ?? false} />
       <span className="absolute right-7 top-1/2 -translate-y-1/2 text-text-3 transition-all group-hover:translate-x-1 group-hover:text-accent">
         &rarr;
       </span>

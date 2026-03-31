@@ -1,5 +1,7 @@
 import { lessons } from "@/data/lessons";
 import { ChapterCard } from "@/components/ui/chapter-card";
+import { auth } from "@clerk/nextjs/server";
+import { getUserProgress } from "@/app/actions/progress";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,7 +9,13 @@ export const metadata: Metadata = {
   description: "Follow 8 structured lessons from beginner to advanced.",
 };
 
-export default function LessonsPage() {
+export default async function LessonsPage() {
+  const { userId } = await auth();
+  const progress = userId
+    ? await getUserProgress()
+    : { completedLessons: [] as string[], quizScore: null as number | null, challengeResults: [] as string[] };
+  const completedSet = new Set(progress.completedLessons);
+
   return (
     <div className="mx-auto max-w-[900px] px-6 py-20">
       <div className="mb-16 text-center">
@@ -23,7 +31,7 @@ export default function LessonsPage() {
       </div>
       <div className="grid gap-4">
         {lessons.map((lesson) => (
-          <ChapterCard key={lesson.slug} lesson={lesson} />
+          <ChapterCard key={lesson.slug} lesson={lesson} completed={completedSet.has(lesson.slug)} />
         ))}
       </div>
     </div>

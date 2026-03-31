@@ -4,8 +4,16 @@ import { ChapterCard } from "@/components/ui/chapter-card";
 import { WorkflowCard } from "@/components/ui/workflow-card";
 import { Stats } from "@/components/ui/stats";
 import { AgentLoop } from "@/components/interactive/agent-loop";
+import { auth } from "@clerk/nextjs/server";
+import { getUserProgress } from "@/app/actions/progress";
 
-export default function Home() {
+export default async function Home() {
+  const { userId } = await auth();
+  const progress = userId
+    ? await getUserProgress()
+    : { completedLessons: [] as string[], quizScore: null as number | null, challengeResults: [] as string[] };
+  const completedSet = new Set(progress.completedLessons);
+
   return (
     <>
       <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pb-20 pt-28 text-center">
@@ -61,7 +69,7 @@ export default function Home() {
           </div>
           <div className="mx-auto grid max-w-[900px] gap-4">
             {lessons.map((lesson) => (
-              <ChapterCard key={lesson.slug} lesson={lesson} />
+              <ChapterCard key={lesson.slug} lesson={lesson} completed={completedSet.has(lesson.slug)} />
             ))}
           </div>
         </div>
