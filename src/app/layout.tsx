@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { LayoutShell } from "@/components/layout/layout-shell";
 import { SearchOverlay } from "@/components/interactive/search-overlay";
@@ -19,13 +20,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme="dark">
-      <body className={inter.className}>
-        <ThemeProvider>
-          <SearchOverlay />
-          <LayoutShell>{children}</LayoutShell>
-        </ThemeProvider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" data-theme="dark">
+        <body className={inter.className}>
+          <ThemeProvider>
+            <SearchOverlay />
+            <LayoutShell>{children}</LayoutShell>
+          </ThemeProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
