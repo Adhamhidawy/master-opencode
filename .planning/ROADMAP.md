@@ -57,7 +57,11 @@ Plans:
   2. Authenticated user's progress (lesson completions, quiz scores, challenge results) persists to Supabase across browser sessions
   3. Unauthenticated user's progress is saved in localStorage as a seamless fallback
   4. The /progress route requires authentication; all learning content pages remain publicly accessible
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 03-01-PLAN.md — Auth & database foundation (Clerk middleware, ClerkProvider, Supabase clients, SQL migration)
+- [ ] 03-02-PLAN.md — Server Actions for progress CRUD + auth-aware Navbar UI
+- [ ] 03-03-PLAN.md — Progress page, localStorage fallback, chapter checkmarks, final polish (404, OG meta, build)
 **UI hint**: yes
 
 ## Progress
@@ -69,4 +73,4 @@ Phases execute in numeric order: 1 → 2 → 3
 |-------|----------------|--------|-----------|
 | 1. Foundation & Content | 3/3 | Complete | 2026-03-30 |
 | 2. Interactive Learning | 3/3 | Complete | 2026-03-31 |
-| 3. Auth & Persistent Progress | 0/? | Not started | - |
+| 3. Auth & Persistent Progress | 0/3 | Planned | - |
