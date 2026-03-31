@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { LayoutShell } from "@/components/layout/layout-shell";
+import { SearchOverlay } from "@/components/interactive/search-overlay";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -21,6 +22,7 @@ export default function RootLayout({
     <html lang="en" data-theme="dark">
       <body className={inter.className}>
         <ThemeProvider>
+          <SearchOverlay />
           <LayoutShell>{children}</LayoutShell>
         </ThemeProvider>
       </body>

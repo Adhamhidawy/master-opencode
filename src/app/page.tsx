@@ -3,6 +3,7 @@ import { lessons } from "@/data/lessons";
 import { ChapterCard } from "@/components/ui/chapter-card";
 import { WorkflowCard } from "@/components/ui/workflow-card";
 import { Stats } from "@/components/ui/stats";
+import { AgentLoop } from "@/components/interactive/agent-loop";
 
 export default function Home() {
   return (
@@ -80,28 +81,7 @@ export default function Home() {
               tools.
             </p>
           </div>
-          <div className="mx-auto flex max-w-[800px] flex-nowrap items-center justify-center gap-0">
-            {[
-              { icon: "\uD83D\uDC64", label: "You" },
-              { icon: "\uD83E\uDD16", label: "LLM" },
-              { icon: "\uD83D\uDD27", label: "Tools" },
-              { icon: "\uD83D\uDCC4", label: "Codebase" },
-              { icon: "\uD83D\uDD04", label: "Result" },
-              { icon: "\uD83E\uDD16", label: "LLM" },
-            ].map((node, i, arr) => (
-              <span key={i} className="flex items-center">
-                <div className="rounded-xl border border-border bg-bg-2 px-6 py-5 text-center transition-all hover:-translate-y-0.5 hover:border-accent">
-                  <div className="mb-1.5 text-[1.5rem]">{node.icon}</div>
-                  <div className="text-[.75rem] font-bold uppercase tracking-[.08em] text-text-2">
-                    {node.label}
-                  </div>
-                </div>
-                {i < arr.length - 1 && (
-                  <span className="px-2 text-[1.2rem] text-text-3">&rarr;</span>
-                )}
-              </span>
-            ))}
-          </div>
+          <AgentLoop />
           <p className="mt-4 text-center text-[.82rem] text-text-3">
             The loop continues until the task is complete or you press Escape to interrupt.
           </p>

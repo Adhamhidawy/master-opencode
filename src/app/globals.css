@@ -70,3 +70,21 @@ body {
   background: var(--color-border);
   border-radius: 3px;
 }
+
+/* Agent Loop Animation */
+@keyframes pulse-node {
+  0%, 100% { border-color: var(--color-border); transform: translateY(0); box-shadow: none; }
+  50% { border-color: var(--color-accent); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3); }
+}
+.loop-node-active {
+  animation: pulse-node 2s ease-in-out infinite;
+  border-color: var(--color-accent);
+}
+
+@keyframes pulse-arrow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; color: var(--color-accent); }
+}
+.loop-arrow-active {
+  animation: pulse-arrow 2s ease-in-out infinite;
+}
