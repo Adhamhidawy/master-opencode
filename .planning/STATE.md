@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-03-31T13:13:15.305Z"
+last_updated: "2026-03-31T13:23:45.138Z"
 progress:
   total_phases: 3
   completed_phases: 1
   total_plans: 9
-  completed_plans: 4
+  completed_plans: 5
 ---
 
 # State: Master OpenCode
@@ -30,7 +30,7 @@ See: .planning/PROJECT.md
 |-------|------|--------|-------|
 | 1 | Foundation & Content | Complete | 3/3 |
 | 2 | Interactive Learning | Complete | 3/3 |
-| 3 | Auth & Persistent Progress | In Progress | 1/3 |
+| 3 | Auth & Persistent Progress | In Progress | 2/3 |
 
 ## Phase 1 Accomplishments
 
@@ -92,6 +92,13 @@ None.
 - Supabase server client (service role key) and browser client (anon key) using @supabase/ssr
 - SQL migration file for user_progress table with clerk_user_id text FK, RLS policies
 - .env.local.example with all 6 required env vars
+- npm run build passes: 17 static pages, zero errors
+
+### Plan 03-02: Server Actions & Auth Navbar
+
+- 4 Server Actions (markLessonComplete, getUserProgress, saveQuizScore, saveChallengeResults) with auth() validation
+- Navbar auth UI: SignInButton (modal) for anonymous, UserButton avatar for authenticated
+- Progress nav link visible only when signed in
 - npm run build passes: 17 static pages, zero errors
 
 ## Notes

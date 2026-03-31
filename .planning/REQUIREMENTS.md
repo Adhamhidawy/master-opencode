@@ -42,16 +42,16 @@
 ### Authentication
 
 - [x] **AUTH-01**: User can sign in with GitHub OAuth via Clerk
-- [ ] **AUTH-02**: Sign-in page is accessible from navigation when user is not authenticated
+- [x] **AUTH-02**: Sign-in page is accessible from navigation when user is not authenticated
 - [x] **AUTH-03**: Auth middleware protects only the /progress route (all other pages are public)
-- [ ] **AUTH-04**: Clerk user ID is available as a typed property for database operations
+- [x] **AUTH-04**: Clerk user ID is available as a typed property for database operations
 
 ### Database & Progress
 
 - [x] **DATA-01**: Supabase client setup using @supabase/ssr package with both server and browser clients
 - [x] **DATA-02**: SQL migration file defines user_progress table with clerk_user_id (text, FK), lesson completions, quiz scores, and challenge completions
 - [x] **DATA-03**: Clerk user ID (clerk_user_id text field) is the foreign key in the user_progress table (not Supabase Auth)
-- [ ] **DATA-04**: Progress data is persisted to Supabase when user is authenticated, falls back to localStorage for anonymous users
+- [x] **DATA-04**: Progress data is persisted to Supabase when user is authenticated, falls back to localStorage for anonymous users
 
 ### Documentation
 
@@ -115,13 +115,13 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PAGE-04 | Phase 2 | Complete |
 | PAGE-06 | Phase 2 | Complete |
 | AUTH-01 | Phase 3 | Complete |
-| AUTH-02 | Phase 3 | Pending |
+| AUTH-02 | Phase 3 | Complete |
 | AUTH-03 | Phase 3 | Complete |
-| AUTH-04 | Phase 3 | Pending |
+| AUTH-04 | Phase 3 | Complete |
 | DATA-01 | Phase 3 | Complete |
 | DATA-02 | Phase 3 | Complete |
 | DATA-03 | Phase 3 | Complete |
-| DATA-04 | Phase 3 | Pending |
+| DATA-04 | Phase 3 | Complete |
 
 **Coverage:**
 - v1 requirements: 31 total
