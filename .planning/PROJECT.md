@@ -12,22 +12,22 @@ Users can learn OpenCode from zero to hero through interactive, hands-on lessons
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Migrate all 8 lessons from index.html into structured TypeScript data files — Validated in Phase 1
+- [x] Migrate all 6 challenges — Validated in Phase 2
+- [x] Migrate all 10 quiz questions — Validated in Phase 2
+- [x] Migrate cheat sheet with 6 categories — Validated in Phase 1
+- [x] Create App Router pages: /, /lessons, /lessons/[slug], /challenges, /cheat-sheet, /quiz — Validated in Phase 1 & 2
+- [x] Wire up Clerk auth with GitHub OAuth — Validated in Phase 3
+- [x] Auth middleware protecting /progress route only — Validated in Phase 3
+- [x] Create Supabase client setup (server + browser) using @supabase/ssr — Validated in Phase 3
+- [x] Define user_progress table schema as SQL migration file — Validated in Phase 3
+- [x] Clerk user ID as foreign key (not Supabase Auth) — Validated in Phase 3
+- [x] Generate AGENTS.md — Validated in Phase 1
+- [x] Build progress tracking UI — Validated in Phase 3
 
 ### Active
 
-- [ ] Migrate all 8 lessons from index.html into structured TypeScript data files under /src/data/
-- [ ] Migrate all 6 challenges with scenarios, options, correct answers, and feedback
-- [ ] Migrate all 10 quiz questions with options, correct answers, and scoring logic
-- [ ] Migrate cheat sheet with 6 categories (CLI Commands, Slash Commands, Keybinds, Special Syntax, Install Methods, Config Files)
-- [ ] Create App Router pages: /, /lessons, /lessons/[slug], /challenges, /cheat-sheet, /quiz
-- [ ] Wire up Clerk auth with GitHub OAuth as primary provider
-- [ ] Auth middleware protecting /progress route only
-- [ ] Create Supabase client setup (server + browser) using @supabase/ssr
-- [ ] Define user_progress table schema as SQL migration file
-- [ ] Clerk user ID as foreign key (not Supabase Auth)
-- [ ] Generate AGENTS.md documenting tech stack, folder structure, data schema, auth pattern, conventions
-- [ ] Build progress tracking UI (Phase 2)
+(None — all requirements validated)
 
 ### Out of Scope
 
@@ -83,4 +83,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-30 after initialization*
+*Last updated: 2026-03-31 after Phase 3 completion (all phases done — v1.0.0)*
