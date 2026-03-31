@@ -59,7 +59,7 @@ Plans:
   4. The /progress route requires authentication; all learning content pages remain publicly accessible
 **Plans**: 3 plans
 Plans:
-- [ ] 03-01-PLAN.md — Auth & database foundation (Clerk middleware, ClerkProvider, Supabase clients, SQL migration)
+- [x] 03-01-PLAN.md — Auth & database foundation (Clerk middleware, ClerkProvider, Supabase clients, SQL migration)
 - [ ] 03-02-PLAN.md — Server Actions for progress CRUD + auth-aware Navbar UI
 - [ ] 03-03-PLAN.md — Progress page, localStorage fallback, chapter checkmarks, final polish (404, OG meta, build)
 **UI hint**: yes

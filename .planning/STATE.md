@@ -2,27 +2,27 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-last_updated: "2026-03-31T09:05:04.337Z"
+status: executing
+last_updated: "2026-03-31T13:13:15.305Z"
 progress:
   total_phases: 3
   completed_phases: 1
-  total_plans: 6
-  completed_plans: 3
+  total_plans: 9
+  completed_plans: 4
 ---
 
 # State: Master OpenCode
 
 **Created:** 2026-03-30
 **Updated:** 2026-03-31
-**Status:** Ready to plan
+**Status:** Executing Phase 03
 
 ## Project Reference
 
 See: .planning/PROJECT.md
 
 **Core value:** Users learn OpenCode from zero to hero through interactive, hands-on lessons with real-time feedback and progress tracking
-**Current focus:** Phase 02 — interactive-learning
+**Current focus:** Phase 03 — auth-persistent-progress
 
 ## Phase Status
 
@@ -30,7 +30,7 @@ See: .planning/PROJECT.md
 |-------|------|--------|-------|
 | 1 | Foundation & Content | Complete | 3/3 |
 | 2 | Interactive Learning | Complete | 3/3 |
-| 3 | Auth & Persistent Progress | Not started | 0/? |
+| 3 | Auth & Persistent Progress | In Progress | 1/3 |
 
 ## Phase 1 Accomplishments
 
@@ -83,10 +83,22 @@ See: .planning/PROJECT.md
 
 None.
 
+## Phase 3 Accomplishments
+
+### Plan 03-01: Auth & DB Foundation
+
+- Clerk middleware with clerkMiddleware protecting /progress route only
+- ClerkProvider wrapping app in layout.tsx
+- Supabase server client (service role key) and browser client (anon key) using @supabase/ssr
+- SQL migration file for user_progress table with clerk_user_id text FK, RLS policies
+- .env.local.example with all 6 required env vars
+- npm run build passes: 17 static pages, zero errors
+
 ## Notes
 
 - TabBar fix: SectionRenderer is now async, pre-highlights all tab code blocks with Shiki, passes HTML strings to client TabBar
 - Agent loop fix: removed flex-wrap, increased max-width from 700px to 800px, items shrink to fit on one line
+- Clerk installed with --legacy-peer-deps due to React 19.1.0 vs ~19.1.4 peer dep mismatch
 
 ---
 *State updated: 2026-03-31*
