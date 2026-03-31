@@ -8,8 +8,8 @@
 ### Content Migration
 
 - [ ] **CONT-01**: All 8 lessons (What is OpenCode, Installation, Configuration, Core Concepts, Working with Agents, Tools Deep Dive, Commands & Automation, Advanced Setup) are migrated from index.html to structured TypeScript data files under /src/data/
-- [ ] **CONT-02**: All 6 challenges with titles, scenarios, answer options, correct answers, and feedback explanations are migrated to structured TypeScript data
-- [ ] **CONT-03**: All 10 quiz questions with question text, answer options, correct answer index, and scoring logic are migrated to structured TypeScript data
+- [x] **CONT-02**: All 6 challenges with titles, scenarios, answer options, correct answers, and feedback explanations are migrated to structured TypeScript data
+- [x] **CONT-03**: All 10 quiz questions with question text, answer options, correct answer index, and scoring logic are migrated to structured TypeScript data
 - [ ] **CONT-04**: Cheat sheet with 6 categories (CLI Commands, Slash Commands, Keybinds, Special Syntax, Install Methods, Config Files) is migrated to structured TypeScript data
 - [ ] **CONT-05**: Lesson content preserves code blocks with syntax highlighting, info boxes (tip/warning/success), step lists, tables, tab bars, and inline code styling
 - [ ] **CONT-06**: Content data files are type-safe with discriminated unions for different content block types
@@ -19,9 +19,9 @@
 - [ ] **PAGE-01**: Home page (/) displays hero section, lesson grid (8 chapters), agent loop visualization, and workflow guides
 - [ ] **PAGE-02**: Lessons listing page (/lessons) shows all 8 lessons with chapter numbers, difficulty tags, and descriptions
 - [ ] **PAGE-03**: Individual lesson page (/lessons/[slug]) renders full lesson content with previous/next navigation
-- [ ] **PAGE-04**: Challenges page (/challenges) presents all 6 interactive challenges with scenario-based multiple choice
+- [x] **PAGE-04**: Challenges page (/challenges) presents all 6 interactive challenges with scenario-based multiple choice
 - [ ] **PAGE-05**: Cheat sheet page (/cheat-sheet) displays quick reference cards in a responsive grid
-- [ ] **PAGE-06**: Quiz page (/quiz) presents all 10 quiz questions with scoring (7/10 to pass) and reset functionality
+- [x] **PAGE-06**: Quiz page (/quiz) presents all 10 quiz questions with scoring (7/10 to pass) and reset functionality
 
 ### Foundation & Layout
 
@@ -36,8 +36,8 @@
 - [ ] **INTR-02**: Agent loop animation visualizes the You → LLM → Tools → Codebase → Result → LLM cycle
 - [ ] **INTR-03**: Theme toggle switches between dark and light modes with CSS variable transitions
 - [ ] **INTR-04**: Search overlay (Ctrl+K) searches across all lesson titles and content
-- [ ] **INTR-05**: Challenge cards accept user answer selection, show correct/incorrect feedback with explanation
-- [ ] **INTR-06**: Quiz cards accept answer selection, show correct/incorrect feedback, track score, and display pass/fail result
+- [x] **INTR-05**: Challenge cards accept user answer selection, show correct/incorrect feedback with explanation
+- [x] **INTR-06**: Quiz cards accept answer selection, show correct/incorrect feedback, track score, and display pass/fail result
 
 ### Authentication
 
@@ -108,12 +108,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | INTR-02 | Phase 2 | Pending |
 | INTR-03 | Phase 2 | Pending |
 | INTR-04 | Phase 2 | Pending |
-| INTR-05 | Phase 2 | Pending |
-| INTR-06 | Phase 2 | Pending |
-| CONT-02 | Phase 2 | Pending |
-| CONT-03 | Phase 2 | Pending |
-| PAGE-04 | Phase 2 | Pending |
-| PAGE-06 | Phase 2 | Pending |
+| INTR-05 | Phase 2 | Complete |
+| INTR-06 | Phase 2 | Complete |
+| CONT-02 | Phase 2 | Complete |
+| CONT-03 | Phase 2 | Complete |
+| PAGE-04 | Phase 2 | Complete |
+| PAGE-06 | Phase 2 | Complete |
 | AUTH-01 | Phase 3 | Pending |
 | AUTH-02 | Phase 3 | Pending |
 | AUTH-03 | Phase 3 | Pending |

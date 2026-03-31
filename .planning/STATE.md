@@ -1,22 +1,35 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: executing
+last_updated: "2026-03-31T08:49:27.508Z"
+progress:
+  total_phases: 3
+  completed_phases: 0
+  total_plans: 6
+  completed_plans: 2
+---
+
 # State: Master OpenCode
 
 **Created:** 2026-03-30
 **Updated:** 2026-03-30
-**Status:** Phase 1 Complete — Ready for Phase 2
+**Status:** Executing Phase 02
 
 ## Project Reference
 
 See: .planning/PROJECT.md
 
 **Core value:** Users learn OpenCode from zero to hero through interactive, hands-on lessons with real-time feedback and progress tracking
-**Current focus:** Phase 2: Interactive Learning (next)
+**Current focus:** Phase 02 — interactive-learning
 
 ## Phase Status
 
 | Phase | Name | Status | Plans |
 |-------|------|--------|-------|
 | 1 | Foundation & Content | Complete | 3/3 |
-| 2 | Interactive Learning | Not started | 0/? |
+| 2 | Interactive Learning | In Progress | 2/3 |
 | 3 | Auth & Persistent Progress | Not started | 0/? |
 
 ## Phase 1 Accomplishments
@@ -37,6 +50,23 @@ See: .planning/PROJECT.md
 - 15/16 tests passed
 - 1 minor issue: agent loop 6th node wrapping → fixed (increased max-width, removed flex-wrap)
 - 1 blocker found and fixed: TabBar async Server Component rendering error → refactored to pre-render all tab HTML server-side, TabBar client component renders only pre-highlighted HTML
+
+## Phase 2 Accomplishments
+
+### Plan 02-01: Challenges Page
+
+- Challenge type and 6 challenges migrated from index.html
+- ChallengeFlow client component with useReducer state machine
+- /challenges page with scenario-based multiple choice
+
+### Plan 02-02: Quiz Page
+
+- QuizQuestion type interface (id, question, options, correctIndex)
+- 10 quiz questions migrated from index.html prototype
+- QuizFlow client component with useReducer state machine
+- One question at a time with progress indicator
+- Animated slide transitions between questions
+- Pass/fail result screen at 7/10 threshold with retry
 
 ## Blockers
 
