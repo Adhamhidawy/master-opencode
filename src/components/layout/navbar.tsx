@@ -41,7 +41,10 @@ export function Navbar({ onToggleSidebar }: NavbarProps) {
             Quiz
           </Link>
 
-          <button className="hidden items-center gap-2 rounded-lg border border-border px-3.5 py-1.5 text-[.8rem] text-text-3 transition-all hover:border-border-2 hover:text-text-2 md:flex">
+          <button
+            onClick={() => document.dispatchEvent(new KeyboardEvent("keydown", { key: "k", ctrlKey: true }))}
+            className="hidden items-center gap-2 rounded-lg border border-border px-3.5 py-1.5 text-[.8rem] text-text-3 transition-all hover:border-border-2 hover:text-text-2 md:flex"
+          >
             <Search width={14} height={14} />
             Search
             <kbd className="rounded border border-border bg-bg-3 px-1.5 py-0.5 text-[.7rem]">Ctrl K</kbd>
