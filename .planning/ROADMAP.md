@@ -40,7 +40,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can take the 10-question quiz, see their scored result (7/10 to pass), and reset to try again
   4. User can toggle between dark and light themes and search all content using Ctrl+K
   5. The home page features an animated agent loop visualization cycling through the You → LLM → Tools → Codebase → Result stages
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 02-01-PLAN.md — Challenges page (/challenges) with 6 interactive scenario cards
+- [ ] 02-02-PLAN.md — Quiz page (/quiz) with 10 questions, useReducer, animated transitions, scoring
+- [ ] 02-03-PLAN.md — Global search (Ctrl+K) with fuse.js + animated agent loop on homepage
+**Note**: INTR-01 (terminal simulator /playground) deferred — not in user's Phase 2 feature scope. INTR-03 (theme toggle) already complete from Phase 1.
 **UI hint**: yes
 
 ### Phase 3: Auth & Persistent Progress
@@ -63,5 +68,5 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation & Content | 0/? | Not started | - |
-| 2. Interactive Learning | 0/? | Not started | - |
+| 2. Interactive Learning | 0/3 | Planning complete | - |
 | 3. Auth & Persistent Progress | 0/? | Not started | - |
